@@ -12,15 +12,17 @@ import tpQCM.bo.Utilisateur;
 public class USerDAOJdbcImpl implements UserDAO {
 
 	private static String INSERT_USER = "INSERT INTO utilisateur(nom,prenom,email,password,codeProfil) VALUES(?,?,?,?,?)";
-	private static String SELECT_ID = "SELECT * FROM utilisateur WHERE id=?";
+	private static String SELECT_ID = "SELECT * FROM utilisateur WHERE idUtilisateur=?";
 	private static String SELECT_EMAIL = "SELECT * FROM utilisateur WHERE email=?";
 	// private static String SELECT_EMAIL_MDP="SELECT * FROM utilisateur WHERE
 	// email=? AND password=?";
 	private static String SELECT_PROMO = "SELECT * FROM utilisateur WHERE codePromo=?";
-	private static String UPDATE_MDP = "UDPATE utilisateur SET paswword=? WHERE id=?";
-	private static String UPDATE_PROFIL = "UPDATE utilisateur SET codeProfil=? WHERE id=?";
+	private static String SELECT_RESP_FORM = "SELECT * FROM utilisateur WHERE codeProfil=102 OR codeProfil=103";
+	private static String UPDATE_MDP = "UPDATE utilisateur SET password=?WHERE idUtilisateur=?";
+	private static String UPDATE_PROFIL = "UPDATE utilisateur SET codeProfil=? WHERE idUtilisateur=?";
 	private static String RECHERCHE_NOM = "SELECT * FROM utilisateur WHERE nom LIKE ? ORDER BY nom ASC";
-
+	private static String DELETE_USER="DELETE FROM utilisateur WHERE idUtilisateur=?";
+	
 	@Override
 	public void insertUser(Utilisateur user) throws BusinessException {
 
@@ -175,6 +177,7 @@ public class USerDAOJdbcImpl implements UserDAO {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_MDP);
 			pstmt.setString(1, newMotDePasse);
 			pstmt.setInt(2, id);
+			int nbRows = pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -197,7 +200,8 @@ public class USerDAOJdbcImpl implements UserDAO {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_PROFIL);
 			pstmt.setString(1, newProfil);
 			pstmt.setInt(2, id);
-
+			int nbRows = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -220,7 +224,15 @@ public class USerDAOJdbcImpl implements UserDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(RECHERCHE_NOM);
 			pstmt.setString(1, recherche + "%");
-
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Utilisateur user = new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getInt(6));
+				if (rs.getString(7) != null) {
+					user.setCodePromo(rs.getString(7));
+				}
+				listeRecherche.add(user);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -228,5 +240,50 @@ public class USerDAOJdbcImpl implements UserDAO {
 			throw businessException;
 		}
 		return listeRecherche;
+	}
+
+	@Override
+	public List<Utilisateur> getRespForm() throws BusinessException {
+		List<Utilisateur> liste = new ArrayList<Utilisateur>();
+	try (Connection cnx = ConnectionProvider.getConnection()) {
+		PreparedStatement pstmt = cnx.prepareStatement(SELECT_RESP_FORM);
+		ResultSet rs = pstmt.executeQuery();
+		while(rs.next())
+		{
+			liste.add(new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+					rs.getString(5), rs.getInt(6)));
+			//comme ce sont des responsables et des formateurs, ils n'ont pas de code Promo
+		}
+	}catch (Exception e) {
+		e.printStackTrace();
+		BusinessException businessException = new BusinessException();
+		businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+		throw businessException;
+	}
+		return liste;
+	}
+
+	@Override
+	public void deleteUser(int id) throws BusinessException {
+		if (id == 0) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessException;
+		}
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE_USER);
+			pstmt.setInt(1, id);
+			int nbRows = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
+		}
+
+		
 	}
 }

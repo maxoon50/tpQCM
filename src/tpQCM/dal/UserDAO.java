@@ -1,6 +1,5 @@
 package tpQCM.dal;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import tpQCM.BusinessException;
@@ -24,4 +23,7 @@ public interface UserDAO {
 	
 	public List<Utilisateur> searchByName(String recherche)throws BusinessException;
 	
+	public List<Utilisateur> getRespForm() throws BusinessException;
+	
+	public void deleteUser(int id) throws BusinessException;
 }
