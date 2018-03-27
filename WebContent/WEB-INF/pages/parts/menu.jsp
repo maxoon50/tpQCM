@@ -6,4 +6,4 @@
         <li><a href="${pageContext.request.contextPath}">Recherche utilisateur</a></li>
       </ul>
     </div>
-  </nav>
+</nav>
