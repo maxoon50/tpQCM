@@ -48,7 +48,7 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 				
 					pst.setString(1,p.getEnonce());
 					pst.setBoolean(2, p.isEstBonne());
-					pst.setInt(3, p.getIdQuestion());
+					pst.setInt(3, rs.getInt(1));
 					pst.executeUpdate();
 					
 				}

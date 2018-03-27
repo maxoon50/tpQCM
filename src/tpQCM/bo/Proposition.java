@@ -10,6 +10,12 @@ public class Proposition {
 		super();
 	}
 
+	public Proposition( String enonce, boolean estBonne) {
+		super();
+		this.enonce = enonce;
+		this.estBonne = estBonne;
+	}
+	
 	public Proposition(int idProposition, String enonce, boolean estBonne, int idQuestion) {
 		super();
 		this.idProposition = idProposition;

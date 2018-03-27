@@ -1,5 +1,6 @@
 package tpQCM.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
@@ -9,18 +10,24 @@ public class Question {
 	private String media;
 	private int points;
 	private int idTheme;
-	private List<Proposition> listeProp;
+	private List<Proposition> listeProp =  new ArrayList<Proposition>();
 
 	
 	public Question() {
 		super();
 	}
 
-	public Question(int idQuestion, String enonce, String media, int points, int idTheme) {
+	public Question( String enonce,  int points, int idTheme) {
+		super();
+		this.enonce = enonce;
+		this.points = points;
+		this.idTheme = idTheme;
+	}
+	
+	public Question(int idQuestion, String enonce,  int points, int idTheme) {
 		super();
 		this.idQuestion = idQuestion;
 		this.enonce = enonce;
-		this.media = media;
 		this.points = points;
 		this.idTheme = idTheme;
 	}
@@ -71,6 +78,10 @@ public class Question {
 
 	public void setListeProp(List<Proposition> listeProp) {
 		this.listeProp = listeProp;
+	}
+	
+	public void addProposition(Proposition prop) {
+		this.listeProp.add(prop);
 	}
 
 	@Override
