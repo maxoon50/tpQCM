@@ -8,6 +8,7 @@ public class Question {
 	private int idQuestion;
 	private String enonce;
 	private String media;
+	private Boolean uneReponse;
 	private int points;
 	private int idTheme;
 	private List<Proposition> listeProp =  new ArrayList<Proposition>();
@@ -82,6 +83,14 @@ public class Question {
 	
 	public void addProposition(Proposition prop) {
 		this.listeProp.add(prop);
+	}
+
+	public Boolean isUneReponse() {
+		return uneReponse;
+	}
+
+	public void setUneReponse(boolean uneReponse) {
+		this.uneReponse = uneReponse;
 	}
 
 	@Override

@@ -55,6 +55,9 @@ public class ReferentielManager {
 		if(question.getEnonce() == null || question.getEnonce().length() < 10) {
 			// ajouter le code
 		}
+		if(question.isUneReponse() == null) {
+			// ajouter le code
+		}
 		if(question.getListeProp() == null) {
 			// ajouter le code
 		}
