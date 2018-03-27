@@ -1,5 +1,6 @@
 <%@include file="./parts/head.jsp" %>
-	
+<%@include file="./parts/menu.jsp" %>
+
 	
 	
 		<div class="row">
