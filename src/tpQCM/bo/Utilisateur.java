@@ -8,7 +8,7 @@ public class Utilisateur {
 	private String email;
 	private String password;
 	private int codeProfil;
-	private int codePromo;
+	private String codePromo;//facultatif
 	
 	public Utilisateur() {
 		super();
@@ -18,7 +18,7 @@ public class Utilisateur {
 	/*
 	 * constructeur sans id pour insertion en BDD
 	 */
-	public Utilisateur(String nom, String prenom, String email, String password, int codeProfil, int codePromo) {
+	public Utilisateur(String nom, String prenom, String email, String password, int codeProfil, String codePromo) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -29,8 +29,7 @@ public class Utilisateur {
 	}
 
 
-	public Utilisateur(int idUtilisateur, String nom, String prenom, String email, String password, int codeProfil,
-			int codePromo) {
+	public Utilisateur(int idUtilisateur, String nom, String prenom, String email, String password, int codeProfil) {
 		super();
 		this.idUtilisateur = idUtilisateur;
 		this.nom = nom;
@@ -38,8 +37,8 @@ public class Utilisateur {
 		this.email = email;
 		this.password = password;
 		this.codeProfil = codeProfil;
-		this.codePromo = codePromo;
 	}
+	
 	public int getIdUtilisateur() {
 		return idUtilisateur;
 	}
@@ -76,10 +75,10 @@ public class Utilisateur {
 	public void setCodeProfil(int codeProfil) {
 		this.codeProfil = codeProfil;
 	}
-	public int getCodePromo() {
+	public String getCodePromo() {
 		return codePromo;
 	}
-	public void setCodePromo(int codePromo) {
+	public void setCodePromo(String codePromo) {
 		this.codePromo = codePromo;
 	}
 	

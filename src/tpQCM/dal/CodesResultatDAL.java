@@ -15,5 +15,13 @@ public class CodesResultatDAL {
 	
 	public static final int SELECT_OBJET_ECHEC=10002;
 	
+	public static final int SELECT_OBJET_NULL=10003;
+	
+	/**** USER ***/
+	public static final int SELECT_USER_ECHEC=10004;
+	
+	public static final int SELECT_USER_NULL=10005;
+	
+	public static final int DELETE_USER_ECHEC=10006;
 }
 
