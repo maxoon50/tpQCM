@@ -1,0 +1,16 @@
+#blockLogin{
+	margin-top: 25vh;
+	background-color: white;
+	border: solid;
+	border-width: 1px;
+	box-shadow: 5px 10px 5px #c3c0c0;
+	padding: 5vh;
+}
+
+#blockLogin h3{
+	text-align: center;
+}
+
+body{
+	background-color: #e8e8e8;
+}
