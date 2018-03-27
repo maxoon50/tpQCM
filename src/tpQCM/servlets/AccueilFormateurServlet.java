@@ -9,27 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+/**
+ * Servlet implementation class AccueilFormateurServlet
+ */
+@WebServlet("/AccueilFormateur")
+public class AccueilFormateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public LoginServlet() {
-        super();
-    }
-
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/login.jsp");
+		RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/pages/accueilFormateur.jsp");
 		rd.forward(request, response);
 	}
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
-		System.out.println(email);
-		String password = request.getParameter("password");
-		System.out.println(password);
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
