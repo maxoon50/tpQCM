@@ -1,11 +1,15 @@
 package tpQCM.bo;
 
+import java.util.List;
+
 public class Question {
-	int idQuestion;
-	String enonce;
-	String media;
-	int points;
-	int idTheme;
+	
+	private int idQuestion;
+	private String enonce;
+	private String media;
+	private int points;
+	private int idTheme;
+	private List<Proposition> listeProp;
 
 	
 	public Question() {
@@ -59,6 +63,14 @@ public class Question {
 
 	public void setIdTheme(int idTheme) {
 		this.idTheme = idTheme;
+	}
+
+	public List<Proposition> getListeProp() {
+		return listeProp;
+	}
+
+	public void setListeProp(List<Proposition> listeProp) {
+		this.listeProp = listeProp;
 	}
 
 	@Override
