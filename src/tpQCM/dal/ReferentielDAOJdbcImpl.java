@@ -4,23 +4,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import tpQCM.BusinessException;
 import tpQCM.bo.Proposition;
 import tpQCM.bo.Question;
 
 public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 
 
-	
 	private static final String ADD_QUESTION = "INSERT INTO question (enonce, points, idTheme) values ( ? , ? , ? )";
 	private static final String ADD_PROPOSITION = "INSERT INTO proposition ( enonce,estBonne, idQuestion) values (  ? , ?, ? )";
 	private static final String DEL_QUESTION = "DELETE FROM question WHERE question.idQuestion=?";
 	private static final String DEL_PROPOSITION = "DELETE FROM proposition WHERE proposition.idQuestion=?";
 
 	
-	
-	// a ajouter le business exception
 	@Override
-	public Question addQuestion(Question quest) {
+	public Question addQuestion(Question quest) throws BusinessException {
+		
+		if(quest == null) {
+			BusinessException businessExc = new BusinessException();
+			businessExc.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessExc;
+		}
 		
 		Question retval = null;
 		
@@ -44,7 +48,7 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 				
 					pst.setString(1,p.getEnonce());
 					pst.setBoolean(2, p.isEstBonne());
-					pst.setInt(3, p.getIdQuestion());
+					pst.setInt(3, rs.getInt(1));
 					pst.executeUpdate();
 					
 				}
@@ -54,7 +58,10 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 			conn.setAutoCommit(true);
 			retval = quest;
 		}catch(Exception e) {
-			System.out.println(e);
+		      e.printStackTrace();
+		      BusinessException businessException = new BusinessException();
+		      businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+		      throw businessException;
 		}
 			return retval;
 	}
@@ -62,7 +69,13 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 
 
 	@Override
-	public int removeQuestion(int id) {
+	public int removeQuestion(int id) throws BusinessException {
+		if(id == 0) {
+			BusinessException businessExc = new BusinessException();
+			businessExc.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessExc;
+		}
+		
 		int result = 0;
 		try(Connection conn = ConnectionProvider.getConnection()){
 			
@@ -80,7 +93,10 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 			conn.setAutoCommit(true);
 			
 		}catch(Exception e) {
-			System.out.println(e);
+		      e.printStackTrace();
+		      BusinessException businessException = new BusinessException();
+		      businessException.ajouterErreur(CodesResultatDAL.DELETE_USER_ECHEC);
+		      throw businessException;
 		}
 		return result;
 	}
