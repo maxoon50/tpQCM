@@ -17,5 +17,7 @@ public abstract class CodesResultatBLL {
 	
 	public static final int REGLE_USER_PROFIL_ERREUR= 20004;
 
+	public static final int ERREUR_EMAIL_INCONNU=20005;
 	
+	public static final int ERREUR_LOGIN=20006;
 }

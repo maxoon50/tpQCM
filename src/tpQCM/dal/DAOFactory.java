@@ -4,7 +4,7 @@ public class DAOFactory {
 
 public static UserDAO getUSerDAO() {
 		
-		return new USerDAOJdbcImpl();
+		return new UserDAOJdbcImpl();
 		
 	}
 }

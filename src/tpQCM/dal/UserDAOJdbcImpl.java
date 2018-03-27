@@ -9,7 +9,7 @@ import java.util.List;
 import tpQCM.BusinessException;
 import tpQCM.bo.Utilisateur;
 
-public class USerDAOJdbcImpl implements UserDAO {
+public class UserDAOJdbcImpl implements UserDAO {
 
 	private static String INSERT_USER = "INSERT INTO utilisateur(nom,prenom,email,password,codeProfil) VALUES(?,?,?,?,?)";
 	private static String SELECT_ID = "SELECT * FROM utilisateur WHERE idUtilisateur=?";
@@ -233,7 +233,7 @@ public class USerDAOJdbcImpl implements UserDAO {
 				}
 				listeRecherche.add(user);
 			}
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
