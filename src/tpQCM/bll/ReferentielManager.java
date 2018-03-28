@@ -1,11 +1,13 @@
 package tpQCM.bll;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tpQCM.BusinessException;
 import tpQCM.bo.Proposition;
 import tpQCM.bo.Question;
 import tpQCM.dal.DAOFactory;
 import tpQCM.dal.ReferentielDAO;
-import tpQCM.dal.ReferentielDAOJdbcImpl;
 
 public class ReferentielManager {
 
@@ -73,6 +75,28 @@ public class ReferentielManager {
 			throw e;
 		}
 		
+	}
+	
+	
+	///////////get Questions by theme/////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public List<Question> getQuestionsByTheme(int idTheme) throws BusinessException{
+		
+		BusinessException businessExc = new BusinessException();
+		ArrayList<Question> listeQuestions = new ArrayList<>();
+		
+		if(idTheme == 0) {
+			businessExc.ajouterErreur(CodesResultatBLL.OBJET_NULL);
+		}
+		
+		try {
+			listeQuestions = (ArrayList<Question>) dao.getQuestionsByTheme(idTheme);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return listeQuestions;
 	}
 	
 	////////////checkQuestion/////////////////////////////////////////////////////////////////////////////////////////////

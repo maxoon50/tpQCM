@@ -3,6 +3,8 @@ package tpQCM.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import tpQCM.BusinessException;
 import tpQCM.bo.Proposition;
@@ -15,10 +17,12 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 	private static final String ADD_PROPOSITION = "INSERT INTO proposition ( enonce,estBonne, idQuestion) values (  ? , ?, ? )";
 	private static final String DEL_QUESTION = "DELETE FROM question WHERE question.idQuestion=?";
 	private static final String DEL_PROPOSITION = "DELETE FROM proposition WHERE proposition.idQuestion=?";
-	
+	private static final String GET_QUESTIONS_AND_RESPONSE_BY_THEMEID = "SELECT * FROM question WHERE idTheme = ?";
+	private static final String GET_PROPOSITIONS_BY_QUESTIONSID = "SELECT * FROM proposition WHERE idQuestion=?";
 	private static final String ADD_THEME= "INSERT INTO theme(libelle) values ( ? )";
 
 //////////////////addQuestion////////////////////////////////////////////////////////////////////////////////////////
+	
 	@Override
 	public Question addQuestion(Question quest) throws BusinessException {
 		
@@ -68,6 +72,7 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 
 
 //////////////////removeQuestion////////////////////////////////////////////////////////////////////////////////////////
+	
 	@Override
 	public int removeQuestion(int id) throws BusinessException {
 		
@@ -131,6 +136,51 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 			
 		}
 		
+	}
+
+//////////////////addQuestion////////////////////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public List<Question> getQuestionsByTheme(int idTheme) throws BusinessException {
+		
+		List<Question> listeQuestion = new ArrayList<Question>();
+		BusinessException businessExc = new BusinessException();
+		
+		try(Connection conn = ConnectionProvider.getConnection()){
+			PreparedStatement pst = conn.prepareStatement(GET_QUESTIONS_AND_RESPONSE_BY_THEMEID);
+			pst.setInt(1, idTheme);
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()){
+				Question q = new Question(
+						rs.getInt("idQuestion"),
+						rs.getString("enonce"),
+						rs.getInt("points"),
+						rs.getInt("idTheme"), 
+						rs.getBoolean("uneReponse"));
+				
+				pst = conn.prepareStatement(GET_PROPOSITIONS_BY_QUESTIONSID);
+				pst.setInt(1, rs.getInt("idQuestion"));
+				ResultSet rs2 = pst.executeQuery();
+				
+				while(rs2.next()) {
+					q.addProposition(new Proposition(
+							rs2.getInt("idProposition"),
+							rs2.getString("enonce"),
+							rs2.getBoolean("estBonne"),
+							rs.getInt("idQuestion")));
+				}
+				
+				listeQuestion.add(q);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			businessExc.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+			throw businessExc;
+		}
+		
+		return listeQuestion;
 	}
 	
 	

@@ -23,6 +23,7 @@ public class Proposition {
 		this.estBonne = estBonne;
 		this.idQuestion = idQuestion;
 	}
+	
 
 	public int getIdProposition() {
 		return idProposition;
