@@ -53,3 +53,18 @@ body{
 #blockListeTest h3{
 	text-align: center;
 }
+
+#blockThemeTest{
+	margin-top: 3vh;
+	background-color: white;
+	box-shadow: 5px 10px 5px #c3c0c0;
+	padding: 5vh;
+}
+
+#blockThemeTest h4{
+	text-align: center;
+}
+
+#logoAddTheme .material-icons{
+	pading: 20px;
+}
