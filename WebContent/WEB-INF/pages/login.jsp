@@ -5,7 +5,7 @@
 	
 		<div class="row">
 		    <div class="input-field offset-s4 col s4" id="blockLogin">
-		    	<form method="post" action="login">
+		    	<form method="post" action="/login">
 			    	<h3>Login</h3>
 				    <div class="row">
 				     	<div class="col s4">

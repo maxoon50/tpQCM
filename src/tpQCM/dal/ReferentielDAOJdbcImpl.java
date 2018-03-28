@@ -181,8 +181,8 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 						rs.getInt("idQuestion"),
 						rs.getString("enonce"),
 						rs.getInt("points"),
-						rs.getInt("idTheme"), 
-						rs.getBoolean("uneReponse"));
+						rs.getInt("idTheme"));
+						/*rs.getBoolean("uneReponse"));*/
 				
 				pst = conn.prepareStatement(GET_PROPOSITIONS_BY_QUESTIONSID);
 				pst.setInt(1, rs.getInt("idQuestion"));
