@@ -15,8 +15,10 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 	private static final String ADD_PROPOSITION = "INSERT INTO proposition ( enonce,estBonne, idQuestion) values (  ? , ?, ? )";
 	private static final String DEL_QUESTION = "DELETE FROM question WHERE question.idQuestion=?";
 	private static final String DEL_PROPOSITION = "DELETE FROM proposition WHERE proposition.idQuestion=?";
-
 	
+	private static final String ADD_THEME= "INSERT INTO theme(libelle) values ( ? )";
+
+//////////////////addQuestion////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Question addQuestion(Question quest) throws BusinessException {
 		
@@ -42,15 +44,13 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 			ResultSet rs = pst.getGeneratedKeys();
 			
 			if(rs.next()) {
-				for(Proposition p : quest.getListeProp()) {
-					
+				for(Proposition p : quest.getListeProp()) {					
 					pst = conn.prepareStatement(ADD_PROPOSITION);
 				
 					pst.setString(1,p.getEnonce());
 					pst.setBoolean(2, p.isEstBonne());
 					pst.setInt(3, rs.getInt(1));
-					pst.executeUpdate();
-					
+					pst.executeUpdate();			
 				}
 			}
 			
@@ -67,9 +67,10 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 	}
 
 
-
+//////////////////removeQuestion////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public int removeQuestion(int id) throws BusinessException {
+		
 		if(id == 0) {
 			BusinessException businessExc = new BusinessException();
 			businessExc.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
@@ -99,6 +100,37 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 		      throw businessException;
 		}
 		return result;
+	}
+
+
+////////////////// addTheme////////////////////////////////////////////////////////////////////////////////////////
+	/* 
+	 *  ajoute un thème
+	 */
+	@Override
+	public void addTheme(String str) throws BusinessException {
+		
+		BusinessException businessExc = new BusinessException();
+		
+		if(str == null || str.length() == 0) {
+			businessExc.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessExc;
+		}
+		
+		try(Connection conn = ConnectionProvider.getConnection()){			
+			
+			PreparedStatement pst = conn.prepareStatement(ADD_THEME);
+			pst.setString(1, str);
+			pst.executeUpdate();
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			businessExc.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessExc;
+			
+		}
+		
 	}
 	
 	

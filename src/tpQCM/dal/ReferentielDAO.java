@@ -9,4 +9,6 @@ public interface ReferentielDAO {
 	
 	public int removeQuestion(int id) throws BusinessException;
 	
+	public void addTheme(String str)throws BusinessException;
+	
 }
