@@ -63,6 +63,10 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int REGLE_REFERENTIEL_PROP_LONG_ERREUR=20105;
 	
+	/**
+	 * Echec l'intitulé du thème est inférieur à 2
+	 */
+	public static final int REGLE_REFERENTIEL_THEME_ERREUR=20106;
 
 
 }

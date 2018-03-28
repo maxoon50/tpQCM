@@ -15,6 +15,8 @@ public class ReferentielManager {
 		 dao =DAOFactory.getReferentielDAO();
 	}
 	
+	//////////addQuestion///////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public Question addQuestion(Question quest) throws BusinessException {
 		
 		Question question = null;
@@ -36,6 +38,7 @@ public class ReferentielManager {
 		return question;
 	}
 	
+	///////////removeQuestion//////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public int removeQuestion(int id) throws BusinessException{
 		
@@ -55,6 +58,24 @@ public class ReferentielManager {
 		}
 		return retval;
 	}
+	
+	///////////addTheme////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void addTheme(String str) throws BusinessException{
+		BusinessException businessExc = new BusinessException();
+		if(str == null || str.length() < 2) {
+			businessExc.ajouterErreur(CodesResultatBLL.REGLE_REFERENTIEL_THEME_ERREUR);
+			throw businessExc;
+		}
+		try {
+			dao.addTheme(str);
+		} catch (BusinessException e) {
+			throw e;
+		}
+		
+	}
+	
+	////////////checkQuestion/////////////////////////////////////////////////////////////////////////////////////////////
 	
 	private  void checkQuestion(Question question, BusinessException businessExc) {
 		
@@ -77,8 +98,9 @@ public class ReferentielManager {
 			if(p.getEnonce().length() == 0) {
 				businessExc.ajouterErreur(CodesResultatBLL.REGLE_REFERENTIEL_PROP_LONG_ERREUR);
 			}
-		}
-		
+		}	
 	}
+	
+
 
 }
