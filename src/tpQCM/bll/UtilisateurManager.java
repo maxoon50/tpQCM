@@ -17,9 +17,17 @@ import tpQCM.dal.UserDAO;
  * @date 27 mars 2018
  * @version tpQCM v1.0
  */
+/**
+ * classe en charge de faire
+ * @author mleroux2017
+ * @date 28 mars 2018
+ * @version tpQCM v1.0
+ */
 public class UtilisateurManager {
 	
-	
+	/*
+	 * Constructeur
+	 */
 	private UserDAO userDAO;
 	
 	public UtilisateurManager() {
@@ -101,7 +109,13 @@ public class UtilisateurManager {
 	
 	
 	
-	public void updateMdp(int id,String newMotDePasse)throws BusinessException{
+	/**
+	 * methode en charge de modifier le mot de passe d'un user 
+	 * @param id
+	 * @param newMotDePasse
+	 * @throws BusinessException
+	 */
+	public void modifierMdp(int id,String newMotDePasse)throws BusinessException{
 		BusinessException businessException = new BusinessException();
 		this.validerPasswordUser(newMotDePasse,businessException);
 		
@@ -112,30 +126,68 @@ public class UtilisateurManager {
 		}
 	}
 	
-	public void updateProfil(int id,String newProfil)throws BusinessException;
+	/**
+	 * methode en charge de mosdifier le profil d'un user
+	 * ex : externer passe en stagiaire, formateur passe en responsable
+	 * @param id
+	 * @param newProfil
+	 * @throws BusinessException
+	 */
+	public void modifierProfil(int id,String newProfil)throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		this.validerPasswordUser(newProfil,businessException);
+		
+		if(!businessException.hasErreurs()) {
+			this.userDAO.updateMdp(id, newProfil);
+		}else {
+			throw businessException;
+		}
+	};
 	
-	public List<Utilisateur> searchByName(String recherche)throws BusinessException;
 	
+	/**
+	 * methode en charge de rechercher un user par son nom
+	 * @param recherche
+	 * @return
+	 * @throws BusinessException
+	 */
+	public List<Utilisateur> rechercher(String recherche)throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		return this.userDAO.searchByName(recherche);
+	};
+	
+	
+	/**
+	 * methode en charge de récupérer la liste des responsable et formateur pour la partie admin
+	 * @return
+	 * @throws BusinessException
+	 */
 	public List<Utilisateur> getRespForm() throws BusinessException{
 		return this.userDAO.getRespForm();
 	};
 	
+	/**
+	 * methode en charge de supprimer un utilisateur
+	 * @param id
+	 * @throws BusinessException
+	 */
 	public void supprimerUtilisateur(int id) throws BusinessException{
 		this.userDAO.deleteUser(id);
 	}
 	
 	
-	
-	
+	/**
+	 * methode en charge de valider les données
+	 * @param user
+	 * @param businessException
+	 */
 	private void valider(Utilisateur user, BusinessException businessException) {
 		
-		if(user.getNom()==null || user.getNom().trim().length()>250)
-		{
+		if(user.getNom()==null || user.getNom().trim().length()>250){
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_NOM_ERREUR);
 		}
 	
-		if(user.getPrenom()==null || user.getPrenom().trim().length()>250)
-		{
+		if(user.getPrenom()==null || user.getPrenom().trim().length()>250){
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_NOM_ERREUR);
 		}
 		
@@ -145,24 +197,19 @@ public class UtilisateurManager {
 	}
 	
 	
-	
-	
 	private void validerEmailUser(String email, BusinessException businessException) {
-		if(email==null || email.trim().length()>50)
-		{
+		if(email==null || email.trim().length()>50){
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_EMAIL_ERREUR);
 		}
 	}
 	
 	private void validerPasswordUser(String password, BusinessException businessException) {
-		if(password==null || password.trim().length()>20)
-		{
+		if(password==null || password.trim().length()>20){
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_PASSWORD_ERREUR);
 		}
 	}
 	private void validerCodeProfilUser(int profil, BusinessException businessException) {
-		if(profil<100 || profil>104)
-		{
+		if(profil<100 || profil>104){
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_USER_PROFIL_ERREUR);
 		}
 	}
