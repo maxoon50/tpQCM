@@ -3,12 +3,14 @@ package tpQCM.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import tpQCM.BusinessException;
 import tpQCM.bo.Proposition;
 import tpQCM.bo.Question;
+import tpQCM.bo.Theme;
 
 public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 
@@ -20,6 +22,7 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 	private static final String GET_QUESTIONS_AND_RESPONSE_BY_THEMEID = "SELECT * FROM question WHERE idTheme = ?";
 	private static final String GET_PROPOSITIONS_BY_QUESTIONSID = "SELECT * FROM proposition WHERE idQuestion=?";
 	private static final String ADD_THEME= "INSERT INTO theme(libelle) values ( ? )";
+	private static final String GET_ALL_THEMES= "SELECT * FROM theme";
 
 //////////////////addQuestion////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -134,10 +137,32 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 			businessExc.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
 			throw businessExc;
 			
-		}
-		
+		}	
 	}
-
+	
+//////////////////get all Themes////////////////////////////////////////////////////////////////////////////////////////
+	
+	/*
+	 * récupère tous les thèmes
+	 */
+	@Override
+	public List<Theme> getAllThemes() throws BusinessException {
+		List<Theme> listeTheme = new ArrayList<Theme>();
+		
+		try(Connection conn = ConnectionProvider.getConnection()){
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(GET_ALL_THEMES);
+			while(rs.next()) {
+				listeTheme.add(new Theme(rs.getInt("idTheme"),rs.getString("libelle")));
+			}
+		}catch(Exception e) {
+			BusinessException businessExc = new BusinessException();
+			businessExc.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+			throw businessExc;
+		}
+		return listeTheme;
+	}
+	
 //////////////////addQuestion////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
@@ -182,10 +207,8 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 		
 		return listeQuestion;
 	}
-	
-	
-	
-	
-	
+
+
+
 
 }

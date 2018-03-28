@@ -6,6 +6,7 @@ import java.util.List;
 import tpQCM.BusinessException;
 import tpQCM.bo.Proposition;
 import tpQCM.bo.Question;
+import tpQCM.bo.Theme;
 import tpQCM.dal.DAOFactory;
 import tpQCM.dal.ReferentielDAO;
 
@@ -73,8 +74,7 @@ public class ReferentielManager {
 			dao.addTheme(str);
 		} catch (BusinessException e) {
 			throw e;
-		}
-		
+		}	
 	}
 	
 	
@@ -97,6 +97,21 @@ public class ReferentielManager {
 		}
 		
 		return listeQuestions;
+	}
+	
+	//////////// get all themes /////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public List<Theme> getAllThemes() throws BusinessException{
+
+		ArrayList<Theme> listeThemes = new ArrayList<Theme>();		
+		
+		try {
+			listeThemes = (ArrayList<Theme>) dao.getAllThemes();
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return listeThemes;
 	}
 	
 	////////////checkQuestion/////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,6 +139,8 @@ public class ReferentielManager {
 			}
 		}	
 	}
+	
+	
 	
 
 

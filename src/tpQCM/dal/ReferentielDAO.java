@@ -4,6 +4,7 @@ import java.util.List;
 
 import tpQCM.BusinessException;
 import tpQCM.bo.Question;
+import tpQCM.bo.Theme;
 
 public interface ReferentielDAO {
 	
@@ -14,5 +15,7 @@ public interface ReferentielDAO {
 	public int removeQuestion(int id) throws BusinessException;
 	
 	public void addTheme(String str)throws BusinessException;
+	
+	public List<Theme> getAllThemes() throws BusinessException;
 	
 }
