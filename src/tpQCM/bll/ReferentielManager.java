@@ -3,6 +3,7 @@ package tpQCM.bll;
 import tpQCM.BusinessException;
 import tpQCM.bo.Proposition;
 import tpQCM.bo.Question;
+import tpQCM.dal.DAOFactory;
 import tpQCM.dal.ReferentielDAO;
 import tpQCM.dal.ReferentielDAOJdbcImpl;
 
@@ -11,7 +12,7 @@ public class ReferentielManager {
 	private ReferentielDAO dao ;
 	
 	public ReferentielManager() {
-		 dao = new ReferentielDAOJdbcImpl();
+		 dao =DAOFactory.getReferentielDAO();
 	}
 	
 	public Question addQuestion(Question quest) throws BusinessException {
