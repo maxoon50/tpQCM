@@ -5,7 +5,7 @@
 	
 		<div class="row">
 		    <div class="input-field offset-s4 col s4" id="blockLogin">
-		    	<form method="post" action="login">
+		    	<form method="post" action="${pageContext.request.contextPath}/login">
 			    	<h3>Login</h3>
 				    <div class="row">
 				     	<div class="col s4">
@@ -31,6 +31,21 @@
 						</div>
 					</div>
 				</form> 
+				<div>
+				<c:if test="${!empty erreur}">Erreur classique</c:if>
+				
+				<c:if test="${!empty erreur}">
+					<div class="alert alert-danger" role="alert">
+					  <strong>Erreur!</strong>
+					  <ul>
+					  	<c:forEach var="code" items="${erreur}">
+					  		<li>${LecteurMessage.getMessageErreur(code)}</li>
+					  	</c:forEach>
+			  			</ul>
+					</div>
+				</c:if>
+				
+				</div>
 			</div>
 	 	</div>
 
