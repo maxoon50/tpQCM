@@ -25,12 +25,13 @@ public class Question {
 		this.idTheme = idTheme;
 	}
 	
-	public Question(int idQuestion, String enonce,  int points, int idTheme) {
+	public Question(int idQuestion, String enonce,  int points, int idTheme, Boolean uneReponse) {
 		super();
 		this.idQuestion = idQuestion;
 		this.enonce = enonce;
 		this.points = points;
 		this.idTheme = idTheme;
+		this.uneReponse = uneReponse;
 	}
 
 	public int getIdQuestion() {
@@ -95,9 +96,11 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [idQuestion=" + idQuestion + ", enonce=" + enonce + ", media=" + media + ", points=" + points
-				+ ", idTheme=" + idTheme + "]";
+		return "Question [idQuestion=" + idQuestion + ", enonce=" + enonce + ", media=" + media + ", uneReponse="
+				+ uneReponse + ", points=" + points + ", idTheme=" + idTheme + ", listeProp=" + listeProp + "]";
 	}
+
+
 	
 	
 	
