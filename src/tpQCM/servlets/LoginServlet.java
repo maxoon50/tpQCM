@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import tpQCM.bo.Utilisateur;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -30,6 +33,13 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(email);
 		String password = request.getParameter("password");
 		System.out.println(password);
+		
+		// a remplacer par le retour du manager 
+		Utilisateur user = new Utilisateur();
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("user", user);
+		
 		doGet(request, response);
 	}
 
