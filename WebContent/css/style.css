@@ -53,3 +53,18 @@ body{
 #blockListeTest h3{
 	text-align: center;
 }
+.form-container{
+	 min-width: 800px;
+    background-color: white;
+    background-color: white;
+    padding: 30px;
+    margin-top: 50px;
+    margin: auto;
+}
+.mt-l{
+	margin-top:50px;
+}
+
+.flex{
+	display:flex;
+}
