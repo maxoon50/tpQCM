@@ -3,9 +3,9 @@
 	<nav>
 	    <div class="nav-wrapper">
 	      <img id="logo" src="${pageContext.request.contextPath}/images/ENIEcole.jpg"/>
-	      <h5 id="bonjour" >Bonjour (Nom Prénom)</h5>
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
 	        <li><a href="${pageContext.request.contextPath}/formateur/ajouter-questions">Ajouter Question</a></li>
+	        <li><a href="${pageContext.request.contextPath}/logout">${sessionScope.user.prenom } / déconnection</a></li>
 	      </ul>
 	    </div>
 	</nav>
