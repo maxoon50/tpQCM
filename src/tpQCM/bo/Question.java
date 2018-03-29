@@ -33,6 +33,14 @@ public class Question {
 		this.idTheme = idTheme;
 		this.uneReponse = uneReponse;
 	}
+	
+	public Question(int idQuestion, String enonce,  int points, int idTheme) {
+		super();
+		this.idQuestion = idQuestion;
+		this.enonce = enonce;
+		this.points = points;
+		this.idTheme = idTheme;
+	}
 
 	public int getIdQuestion() {
 		return idQuestion;

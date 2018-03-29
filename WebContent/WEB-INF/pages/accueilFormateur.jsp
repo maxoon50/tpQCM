@@ -15,16 +15,21 @@
 	<div class="offset-s3 col s6" id="blockThemeTest">
 		<h4>Thèmes</h4>
 		<div class="row">
-			<div class="input-field col s8">			
-				<form method="post" action="AccueilFormateur">
-					<select>
-					    <option value="" disabled selected>Selectionnez le thème</option>
-					    <option value="1">Option 1</option>
+			<div class="input-field col s10">			
+				<form method="post" action="${pageContext.request.contextPath}/AccueilFormateur">
+					<select name="theme">
+					    <option disabled selected>Selectionnez le thème</option>
+					    <c:forEach items="${ theme }" var="t">
+					    	<option  value="${t.idTheme}">${ t.libelle }</option>
+					    </c:forEach> 
 					</select>
+					<button class="btn waves-effect waves-light" type="submit" name="action">Générer
+					    <i class="material-icons right">send</i>
+					</button>
 				</form>
 			</div>
-			<div class="col s4">
-				<a id="logoAddTheme" href="" class="waves-effect waves-green btn"><i class="material-icons left">add_circle_outline</i>Ajouter</a>
+			<div class="col s2">
+				  <a href="" class="btn-floating btn-large waves-effect waves-light red">Add</a>
 			</div>
 		</div>
 	</div>
@@ -35,22 +40,30 @@
 		<div class="row">
 			<div class="input-field col s10">
 				<ul class="collapsible">
-				    <li>
-				      <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-				      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-				    </li>
-				    <li>
-				      <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-				      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-				    </li>
-				    <li>
-				      <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-				      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-				    </li>
-				  </ul>
+					<c:if test="${!empty questions}">
+						<c:forEach items="${questions }" var="q">
+						    <li>				    	
+						      <div class="collapsible-header"><i class="material-icons">help_outline</i>${q.enonce }</div>
+						      <div class="collapsible-body">
+							      <span>
+							      	<c:forEach items="${q.getListeProp() }" var="p">
+							      		${p.enonce }<br>
+							      	</c:forEach>
+							      </span>
+							  </div>
+						    </li>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty questions}">
+						<li>				    	
+						   <div class="collapsible-header"><i class="material-icons">help_outline</i>Question</div>
+						   <div class="collapsible-body"><span>Réponse</span></div>
+						</li>
+					</c:if>
+				</ul>
 			</div>
 			<div class="col s2">
-				  <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+				  <a class="btn-floating btn-large waves-effect waves-light red">Add</a>
 			</div>
 		</div>
 	</div>
