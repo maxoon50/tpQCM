@@ -79,7 +79,24 @@ body{
 .mt-l{
 	margin-top:50px;
 }
+.mb-l{
+	margin-bottom:50px;
+}
+.m-m{
+	margin:30px;
+}
 
 .flex{
 	display:flex;
 }
+
+.question-cont{
+	    border-radius: 5px;
+    padding: 20px;
+    background-color: #c8f3eb;
+}
+.flex-align-vert{
+	    display: flex;
+    justify-content: center;
+    align-items: center;
+}]
