@@ -3,6 +3,8 @@ package tpQCM.bll;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import tpQCM.BusinessException;
 import tpQCM.bo.Proposition;
 import tpQCM.bo.Question;
@@ -20,11 +22,27 @@ public class ReferentielManager {
 	
 	//////////addQuestion///////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public Question addQuestion(Question quest) throws BusinessException {
+	public Question addQuestion(HttpServletRequest  request) throws BusinessException {
 		
 		Question question = null;
 		BusinessException businessExc = new BusinessException();
 		
+		Question quest = new Question(
+				request.getParameter("question"), 
+				Integer.parseInt(request.getParameter("points")),
+				Integer.parseInt( request.getParameter("theme")),
+				request.getParameter("uneReponse") == null ?  false : true
+				);
+		
+		for(int i = 1; i<=4 ; i++) {
+			if(request.getParameter("reponse"+i) == null) {
+				businessExc.ajouterErreur(CodesResultatBLL.REGLE_REFERENTIEL_MANQUE_PROP_ERREUR);
+			}
+			Boolean estBonne = request.getParameter("bonneReponse"+i) == null  ? false : true;
+			Proposition p = new Proposition(request.getParameter("reponse"+i), estBonne);
+			quest.addProposition(p);
+		}
+
 		try {
 			checkQuestion(quest, businessExc);
 			if(!businessExc.hasErreurs())	{
@@ -133,11 +151,19 @@ public class ReferentielManager {
 		if(question.getPoints() == 0 || question.getPoints()<0 || question.getPoints()>10) {
 			businessExc.ajouterErreur(CodesResultatBLL. REGLE_REFERENTIEL_POINTS_ERREUR);
 		}
+		int nbreSolutions = 0;
 		for(Proposition p : question.getListeProp()) {
+			if(p.isEstBonne()) {
+				nbreSolutions++;
+			}
 			if(p.getEnonce().length() == 0) {
 				businessExc.ajouterErreur(CodesResultatBLL.REGLE_REFERENTIEL_PROP_LONG_ERREUR);
 			}
 		}	
+		
+		if(nbreSolutions != 1 && question.isUneReponse()) {
+			businessExc.ajouterErreur(CodesResultatBLL.REGLE_NOMBRE_REPONSES_ERREUR);
+		}
 	}
 	
 	

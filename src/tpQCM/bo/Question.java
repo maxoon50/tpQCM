@@ -34,6 +34,14 @@ public class Question {
 		this.uneReponse = uneReponse;
 	}
 	
+	public Question( String enonce,  int points, int idTheme, Boolean uneReponse) {
+		super();
+		this.enonce = enonce;
+		this.points = points;
+		this.idTheme = idTheme;
+		this.uneReponse = uneReponse;
+	}
+	
 	public Question(int idQuestion, String enonce,  int points, int idTheme) {
 		super();
 		this.idQuestion = idQuestion;
