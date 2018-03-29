@@ -1,5 +1,5 @@
 <%@include file="./parts/head.jsp" %>
-<%@include file="./parts/menu.jsp" %>
+<%@include file="./menus/menu.jsp" %>
 
 	
 	

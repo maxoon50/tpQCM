@@ -1,15 +1,8 @@
 <%@include file="./parts/head.jsp" %>
 
-	<nav>
-	    <div class="nav-wrapper">
-	      <img id="logo" src="${pageContext.request.contextPath}/images/ENIEcole.jpg"/>
-	      <ul id="nav-mobile" class="right hide-on-med-and-down">
-	        <li><a href="${pageContext.request.contextPath}/Accueil">Tests</a></li>
-	        <li><a href="${pageContext.request.contextPath}/Resultat">Mes Résultats</a></li>
-	         <li><a href="${pageContext.request.contextPath}/logout">${sessionScope.user.prenom } / déconnection</a></li>
-	      </ul>
-	    </div>
-	</nav>
+<%@include file="./menus/menuFormateur.jsp" %>
+
+
 	<div class="flex mt-l">
 	
 	<c:if test="${!empty errors }">
