@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import tpQCM.BusinessException;
 import tpQCM.bll.ReferentielManager;
@@ -31,6 +32,7 @@ public class AjoutSectionServlet extends HttpServlet {
 		//Récupération des thèmes en base
 		ReferentielManager rm=new ReferentielManager();
 		List<Theme> listeTheme=new ArrayList<Theme>();
+		
 		try {
 			listeTheme=rm.getAllThemes();
 		} catch (BusinessException e) {
@@ -67,14 +69,72 @@ public class AjoutSectionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//Récupération de l'idTheme ,du nombre de sections à créer et du nombre de questions
+		//Récupération de l'idTheme et du nombre de questions puis mise en session
 		String theme;
 		int idTheme;
+		String question;
+		int nbQuestion;
+		ReferentielManager rm=new ReferentielManager();
+		
 		theme=request.getParameter("theme");
 		idTheme=Integer.parseInt(theme);
-		System.out.println(theme);
+		question=request.getParameter("nbQuestion");
+		nbQuestion=Integer.parseInt(question);
+		
+		Theme t= new Theme();
+		try {
+			t=rm.getThemeById(idTheme);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		
+		HttpSession session = request.getSession();
+		List<String> listeLibelleSection = null;
+		List<Integer> listeNbQuestion= new ArrayList<Integer>();
+		listeNbQuestion.add(nbQuestion);
+		
+		if(listeLibelleSection == null) {
+			listeLibelleSection = new ArrayList<String>();
+			listeLibelleSection.add(t.getLibelle());
+		}else{
+			listeLibelleSection.add(t.getLibelle());
+		}
+		
+		//mise en session des infos
+		session.setAttribute("libelle", listeLibelleSection);		
+		session.setAttribute("nbQuestion", nbQuestion);
+		
+		List<Theme> listeTheme=new ArrayList<Theme>();
+		
+		try {
+			listeTheme=rm.getAllThemes();
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("theme", listeTheme);
+		
+		//récupération du nombre de questions par thème
+		List<Integer> listeNbQuestionTheme=new ArrayList<Integer>();
+		List<Question> listeQuestion=new ArrayList<Question>();
+		int i=0;
+		Hashtable ht = new Hashtable();
+		for(Theme t2 : listeTheme) {
+			try {
+				listeQuestion=rm.getQuestionsByTheme(t2.getIdTheme());
+				ht.put(t2.getIdTheme(),listeQuestion.size());
+			} catch (BusinessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		
+		request.setAttribute("themes", ht);
+		
+		
+		RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/pages/sectionAjout.jsp");
+		rd.forward(request, response);
 	}
 
 }

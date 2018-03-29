@@ -17,5 +17,7 @@ public interface ReferentielDAO {
 	public void addTheme(String str)throws BusinessException;
 	
 	public List<Theme> getAllThemes() throws BusinessException;
+
+	Theme getThemeById(int idTheme) throws BusinessException;
 	
 }
