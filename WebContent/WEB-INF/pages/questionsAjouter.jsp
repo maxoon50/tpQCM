@@ -11,6 +11,16 @@
 	    </div>
 	</nav>
 	<div class="flex mt-l">
+	
+	<c:if test="${!empty errors }">
+	    <div class="errors-display">
+		    <c:forEach items="${ errors }" var="e">
+		    				    	<p>${ e }</p>
+					    </c:forEach> 
+		 </div>
+	</c:if>
+	
+	
 <div class="form-container mb-l">
 		   	<form method="post" action="${pageContext.request.contextPath}/formateur/ajouter-questions">
 			    <h3 class="m-m">Ajouter une question</h3>
@@ -37,7 +47,18 @@
     					<label for="uneReponse">une seule réponse</label>
 				   		 </div>
 				    </div>
+				        <div class="row flex-align-vert ">
+				        				          <div class="input-field col s6">
+    						<p>Nombre de points </p>
+     				   </div>
 
+				          <div class="input-field col s4">
+    <p class="range-field">
+
+      <input type="range" id="test5" min="1" max="5" name="points"/>
+    </p>
+        </div>
+</div>
 				    <div class="row flex-align-vert ">
 
 				        <div class="input-field col s9">
@@ -52,7 +73,7 @@
 				    <div class="row flex-align-vert">
 		
 				        <div class="input-field col s9">
-				          	<input name="reponse2" type="email" id="reponse2" class="autocomplete">
+				          	<input name="reponse2" type="text" id="reponse2" class="autocomplete">
 				          	<label for="reponse2">Réponse 2 </label>
 				        </div>
 				        	        <div class=" col s3">
@@ -74,7 +95,7 @@
 				  <div class="row flex-align-vert">
 		
 				        <div class="input-field col s9">
-				          	<input name="reponse4" type="email" id="reponse4" class="autocomplete">
+				          	<input name="reponse4" type="text" id="reponse4" class="autocomplete">
 				          	<label for="reponse4">Réponse 4 </label>
 				        </div>
 				        						        	        <div class=" col s3">

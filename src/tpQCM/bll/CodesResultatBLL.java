@@ -68,5 +68,15 @@ public abstract class CodesResultatBLL {
 	 */
 	public static final int REGLE_REFERENTIEL_THEME_ERREUR=20106;
 
+	/**
+	 * Echec toutes es propositions n ont pas été renseignées
+	 */
+	public static final int REGLE_REFERENTIEL_MANQUE_PROP_ERREUR=20107;
+	
+	/**
+	 * Echec une reponse cochée et plusieurs prop proposées ou inverse
+	 */
+	public static final int 	REGLE_NOMBRE_REPONSES_ERREUR=20108;
+
 
 }

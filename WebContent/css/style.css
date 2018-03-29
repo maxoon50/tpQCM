@@ -99,4 +99,11 @@ body{
 	    display: flex;
     justify-content: center;
     align-items: center;
-}]
+}
+.errors-display{
+	 position: absolute;
+    top: 0px;
+    background-color: rgb(238,110,115);
+    border-radius: 5px;
+    padding: 10px;
+}

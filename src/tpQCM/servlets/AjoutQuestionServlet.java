@@ -1,6 +1,7 @@
 package tpQCM.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import tpQCM.BusinessException;
 import tpQCM.bll.ReferentielManager;
 import tpQCM.bo.Theme;
+import tpQCM.messages.LecteurMessage;
 
 
 @WebServlet("/formateur/ajouter-questions")
@@ -40,6 +42,23 @@ public class AjoutQuestionServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ReferentielManager manager = new ReferentielManager();
+		
+		try {
+			manager.addQuestion(request);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			
+			List<Integer> liste = e.getListeCodesErreur();
+			ArrayList<String> listeErreurs = new ArrayList<>();
+			
+			for(Integer i : liste) {
+				listeErreurs.add(LecteurMessage.getMessageErreur(i));
+			}
+			
+			request.setAttribute("errors", listeErreurs);		
+		}
 		doGet(request, response);
 	}
 
