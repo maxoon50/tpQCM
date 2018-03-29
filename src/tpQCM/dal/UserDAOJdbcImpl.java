@@ -3,9 +3,12 @@ package tpQCM.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import tpQCM.BusinessException;
 import tpQCM.bo.Promotion;
@@ -333,13 +336,12 @@ public class UserDAOJdbcImpl implements UserDAO {
 			pstmt.setString(1, promotion.getCodePromo());
 			pstmt.setString(2, promotion.getLibelle());
 			nbRows = pstmt.executeUpdate();
-		}catch (SQLIntegrityConstraintViolationException sqle) {
+		}catch (SQLServerException sqle) {
 			sqle.printStackTrace();
 			 businessException.ajouterErreur(CodesResultatDAL.INSERT_EXIST);
 			 throw businessException;
 		} catch (Exception e) {
 			e.printStackTrace();
-			
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
 			throw businessException;
 

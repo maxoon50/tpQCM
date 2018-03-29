@@ -1,7 +1,16 @@
 <%@include file="./parts/head.jsp" %>
-<%@include file="./parts/menu.jsp" %>
+<%@include file="./parts/menuResponsable.jsp" %>
 
-
+<div class="flex mt-l">
+	
+	<c:if test="${!empty errors }">
+	    <div class="errors-display">
+		    <c:forEach items="${ errors }" var="e">
+		    	<p>${ e }</p>
+			</c:forEach> 
+		 </div>
+	</c:if>
+</div>
 	<div class="row">
 		 <div class="input-field offset-s3 col s6" id="blockInscription">
 		   	<form method="post" action="${pageContext.request.contextPath}/Inscription">

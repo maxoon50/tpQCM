@@ -60,6 +60,7 @@ public class InscriptionServlet extends HttpServlet {
 		UtilisateurManager userMger = new UtilisateurManager();
 		try {
 			userMger.insererUtilisateur(request);		
+			response.sendRedirect(request.getContextPath()+request.getServletPath());
 			
 		} catch (BusinessException e ) {
 			e.printStackTrace();
@@ -73,7 +74,7 @@ public class InscriptionServlet extends HttpServlet {
 			doGet(request,response);
 		}
 		
-		response.sendRedirect(request.getContextPath()+request.getServletPath());
+		
 	}
 
 }
