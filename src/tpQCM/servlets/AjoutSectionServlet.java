@@ -47,7 +47,7 @@ public class AjoutSectionServlet extends HttpServlet {
 		for(Theme t : listeTheme) {
 			try {
 				listeQuestion=rm.getQuestionsByTheme(t.getIdTheme());
-				ht.put(t.getLibelle(),listeQuestion.size());
+				ht.put(t.getIdTheme(),listeQuestion.size());
 			} catch (BusinessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -16,17 +16,21 @@
 		<form method="post" action="${pageContext.request.contextPath}/AjoutSection">
 			<div class="row">
 				<div class="input-field col s6">			
-					<select name="theme">
+					<select name="theme" id="js-selection-theme">
 					    <option disabled selected>Selectionnez le thème</option>
-					    <c:forEach items="${ themes }" var="t">
-					    	<option  value="${t.key}">${ t.key }</option>
+					    <c:forEach items="${ theme }" var="t">
+					    	<option  value="${t.idTheme}">${ t.libelle }</option>
 					    </c:forEach> 
 					</select>
 				</div>
 				<div class="input-field col s6">
 						<p class="range-field">
 							
-						 	<input <c:forEach items="${themes }" var="t"> data-${t.key }="${ t.value }" </c:forEach> name="nbSection" type="range" id="test5" min="0" max="${ t.value }" />
+						 	<input id="js-nbre-questions-max"
+						 	 <c:forEach items="${themes }" var="t"> 
+						 	 data-${t.key }="${ t.value }" 
+						 	 </c:forEach>
+						 	  name="nbSection" type="range" id="test5" min="0" max="${ t.value }" />
 							
 						</p>	
 				</div>
