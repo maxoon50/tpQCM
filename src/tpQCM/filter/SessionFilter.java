@@ -12,6 +12,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -33,13 +34,13 @@ public class SessionFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
 	
 		if(req.getServletPath().toLowerCase().contains("login")) {
 			chain.doFilter(request, response);	
 		}else if(session.getAttribute("user") == null) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/login.jsp");
-			rd.forward(request, response);
+			res.sendRedirect(req.getContextPath()+"/login");
 		}else {
 			chain.doFilter(request, response);
 		}
