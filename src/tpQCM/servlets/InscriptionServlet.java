@@ -1,6 +1,7 @@
 package tpQCM.servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import tpQCM.BusinessException;
+import tpQCM.bll.UtilisateurManager;
 
 /**
  * Servlet implementation class InscriptionServlet
@@ -20,6 +24,16 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		UtilisateurManager userMger = new UtilisateurManager();
+		
+		try {
+			List<String> listeCodePromo = userMger.getAllCodePromo();
+			request.setAttribute("codesPromo",listeCodePromo);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			request.setAttribute("erreur","Erreur lors de la récupération des codes Promotion");
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/inscription.jsp");
 		rd.forward(request, response);
 	}
@@ -36,12 +50,18 @@ public class InscriptionServlet extends HttpServlet {
 		System.out.println(email);
 		String password=request.getParameter("password");
 		System.out.println(password);
-		String role=request.getParameter("role");
+		String role=request.getParameter("profil");
 		System.out.println(role);
 		String promo=request.getParameter("promo");
 		System.out.println(promo);
 		
-		doGet(request, response);
+		UtilisateurManager userMger = new UtilisateurManager();
+		try {
+			userMger.insererUtilisateur(request);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }
