@@ -30,6 +30,8 @@ public abstract class CodesResultatBLL {
 	
 	public static final int ERREUR_LOGIN=20006;
 	
+	public static final int CODE_PROMO_EXISTE=20007;
+	
 	///////////////REGLES REFERENTIEL///////////////////////////////////////////////////////////
 	
 	/**

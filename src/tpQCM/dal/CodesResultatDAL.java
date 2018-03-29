@@ -23,5 +23,7 @@ public class CodesResultatDAL {
 	public static final int SELECT_USER_NULL=10005;
 	
 	public static final int DELETE_USER_ECHEC=10006;
+	
+	public static final int INSERT_EXIST=100007;
 }
 

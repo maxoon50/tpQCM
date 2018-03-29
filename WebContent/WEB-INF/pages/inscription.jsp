@@ -4,7 +4,7 @@
 
 	<div class="row">
 		 <div class="input-field offset-s3 col s6" id="blockInscription">
-		   	<form method="post" action="Inscription">
+		   	<form method="post" action="${pageContext.request.contextPath}/Inscription">
 			    <h3>Inscription</h3>
 				   <div class="row">
 				     	<div class="col s4">
@@ -33,7 +33,7 @@
 				          	<label for="autocomplete-input">Email</label>
 				        </div>
 				    </div>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col s4">
 						    <i class="material-icons ">no_encryption</i>
 						</div>
@@ -41,27 +41,49 @@
 						    <input name="password" type="text" id="autocomplete-input" class="autocomplete">
 						    <label for="autocomplete-input">Mot de Passe</label>
 						</div>
-					</div>
+					</div> -->
 					<div class="row">
 						<div class="col s4">
 						    <i class="material-icons ">fingerprint</i>
 						</div>
 						<div class="input-field col s8">
-							<select name="role">
+							<select id="inscr-select-profil" name="profil">
 							   <option value="" disabled selected>Selectionnez le rôle</option>
-							   <option  value="1">Option 1</option>
+							   <option  value="100">Stagiaire</option>
+							   <option  value="101">Externe</option>
 							</select>
 						</div>
 					</div>
-					<div class="row">
+					<div id="cache-promo" class="row hide">
 						<div class="col s4">
 						    <i class="material-icons ">group</i>
 						</div>
 						<div class="input-field col s8">
-							<select name="promo">
+							<select id="inscr-select-promo" name="promo">
 							   <option value="" disabled selected>Selectionnez la promo</option>
-							   <option value="1">Option 1</option>
+							   <c:forEach items="${codesPromo}" var="code">
+    								<option value="${code}">${code}</option>
+								</c:forEach>
+							   <option value="autre">Autre</option>
 							</select>
+						</div>
+					</div>
+					<div class="row hide cache-new-promo">
+						<div class="col s4">
+						    <i class="material-icons ">keyboard_arrow_right</i>
+						</div>
+						<div class="input-field col s8">
+						    <input name="codeNewPromo" type="text" id="autocomplete-input" class="autocomplete">
+						    <label for="autocomplete-input">Code nouvelle promotion</label>
+						</div>
+					</div>
+					<div class="row hide cache-new-promo">
+						<div class="col s4">
+						    <i class="material-icons ">keyboard_arrow_right</i>
+						</div>
+						<div class="input-field col s8">
+						    <input name="nomNewPromo" type="text" id="autocomplete-input" class="autocomplete">
+						    <label for="autocomplete-input">Libellé nouvelle promotion</label>
 						</div>
 					</div>
 					<div class="row">
