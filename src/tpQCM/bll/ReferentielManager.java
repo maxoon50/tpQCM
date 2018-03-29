@@ -132,6 +132,17 @@ public class ReferentielManager {
 		return listeThemes;
 	}
 	
+////////////getQuestionById/////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Theme getThemeById(int idTheme)throws BusinessException{
+		
+		Theme t= new Theme();
+		t=dao.getThemeById(idTheme);
+		return t;	
+		
+	}
+	
+	
 	////////////checkQuestion/////////////////////////////////////////////////////////////////////////////////////////////
 	
 	private  void checkQuestion(Question question, BusinessException businessExc) {
@@ -165,7 +176,6 @@ public class ReferentielManager {
 			businessExc.ajouterErreur(CodesResultatBLL.REGLE_NOMBRE_REPONSES_ERREUR);
 		}
 	}
-	
 	
 	
 

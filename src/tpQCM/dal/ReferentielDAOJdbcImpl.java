@@ -23,6 +23,7 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 	private static final String GET_PROPOSITIONS_BY_QUESTIONSID = "SELECT * FROM proposition WHERE idQuestion=?";
 	private static final String ADD_THEME= "INSERT INTO theme(libelle) values ( ? )";
 	private static final String GET_ALL_THEMES= "SELECT * FROM theme";
+	private static final String GET_THEME_BY_ID="SELECT libelle FROM THEME WHERE idTheme=?";
 
 //////////////////addQuestion////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -208,7 +209,29 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 		return listeQuestion;
 	}
 
-	
+//////////////////GET_THEME_BY_ID////////////////////////////////////////////////////////////////////////////////////////	
+
+	@Override
+	public Theme getThemeById(int idTheme)throws BusinessException{
+		Theme t = null;
+		BusinessException businessExc = new BusinessException();
+		
+		try(Connection con= ConnectionProvider.getConnection()){
+			PreparedStatement pst= con.prepareStatement(GET_THEME_BY_ID);
+			pst.setInt(1, idTheme);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()){
+				t = new Theme(
+						rs.getString("libelle"));						
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			businessExc.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+			throw businessExc;
+		}
+		return t;
+	}
+
 
 
 }

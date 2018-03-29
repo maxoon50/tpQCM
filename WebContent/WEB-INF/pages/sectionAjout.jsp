@@ -24,14 +24,12 @@
 					</select>
 				</div>
 				<div class="input-field col s6">
-						<p class="range-field">
-							
+						<p class="range-field">						
 						 	<input id="js-nbre-questions-max"
-						 	 <c:forEach items="${themes }" var="t"> 
-						 	 data-${t.key }="${ t.value }" 
-						 	 </c:forEach>
-						 	  name="nbSection" type="range" id="test5" min="0" max="${ t.value }" />
-							
+							 	 <c:forEach items="${themes }" var="t"> 
+							 	 data-${t.key }="${ t.value }" 
+							 	 </c:forEach>
+						 	 name="nbQuestion" type="range" id="test5" min="0" max="${ t.value }" />						
 						</p>	
 				</div>
 			</div>
@@ -45,30 +43,43 @@
 		</form>
 	</div>
 </div>
-<div class="row">
-	<div class="offset-s2 col s8" id="blockSectionAjout">
-		<h4 style="text-align:center">Sections du Test</h4>
-		<div class="row">
-			<div class="col s4">
-				<div class="card" id="cardSection">
-				    <div class="card-content">
-				    	<h5 style="text-align:center">Nom du Thème</h5>
-				    	<div class="row">
-				    		<div class="col s2">
-				    			<i class="material-icons right">help_outline</i>
-				    		</div>
-				    		<div class="col s10"> 		
-					    		<p class="range-field">					    	
-					      			<input placeholder="Nombre de Questions" name="nbQuestion" type="range" id="test5" min="0" max="15" />
-					     		</p>
-					     	</div>
-					   	</div>
-					</div>
-				</div>
-		  	</div>
+<form method="post" action="${pageContext.request.contextPath}/AjoutSection">
+	<div class="row">
+		<div class="offset-s2 col s8" id="blockSectionAjout">
+			<h4 style="text-align:center">Sections du Test</h4>
+			<div class="row">
+				<div class="col s4">
+					<c:if test="${!empty libelle}">
+						
+							<div class="card" id="cardSection">
+							    <div class="card-content">
+							    	<h5 style="text-align:center"><%=session.getAttribute("libelle") %></h5>
+							    	<div class="row">
+							    		<div class="col s6">
+							    			<i class="material-icons right">help_outline</i>
+							    		</div>
+							    		<div class="col s3"> 		
+								    		<p class="range-field">					    	
+								      			<input value="<%=session.getAttribute("nbQuestion") %>" name="nbQuestion" type="text" id="test5"  />
+								     		</p>
+								     	</div>
+								   	</div>
+								</div>
+							</div>
+						
+					</c:if>
+			  	</div>
+			</div>
+			<div class="row">
+				<div class="offset-s4 col s4">
+					 <button class="btn waves-effect waves-light" type="submit" name="action">Créer Test
+			    	<i class="material-icons right">send</i>
+			  		</button>
+		  		</div>
+			</div>
 		</div>
 	</div>
-</div>
+</form>
 
 
 
