@@ -1,5 +1,7 @@
 package tpQCM.bll;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -44,6 +46,7 @@ public class UtilisateurManager {
 	 * methode en charge d'ajouter en base un utilisateur
 	 * @param user
 	 * @throws BusinessException
+	 * @throws SQLIntegrityConstraintViolationException 
 	 */
 	public void insererUtilisateur(HttpServletRequest request)throws BusinessException{
 		BusinessException businessException = new BusinessException();
@@ -57,15 +60,23 @@ public class UtilisateurManager {
 		
 		//si on a la création d'une nouvelle promo dans le cadre d'un new candidat, on la crée en base 
 		if(request.getParameter("promo").equals("autre")) {
-				Promotion promotion = new Promotion(request.getParameter("codeNewPromo"),request.getParameter("nomNewPromo"));
-				this.userDAO.insertPromotion(promotion);
+			try {
+					Promotion promotion = new Promotion(request.getParameter("codeNewPromo"),request.getParameter("nomNewPromo"));
+					this.userDAO.insertPromotion(promotion);
+				} catch (BusinessException e) {
+					businessException.ajouterErreur(CodesResultatBLL.CODE_PROMO_EXISTE);
+					e.printStackTrace();
+					throw e;
+			}
 		}
 		// si c'est un stagiaire, on set son code promo
 		if (user.getCodeProfil()==100) {
 			user.setCodePromo(request.getParameter("codeNewPromo"));
 		}
 		
-		user.setPassword(creerPassword());
+		user.setPassword(creerPassword(user));
+		System.out.println(user.getPassword());
+		
 		this.valider(user,businessException);
 		
 		if(!businessException.hasErreurs()) {
@@ -208,10 +219,15 @@ public class UtilisateurManager {
 	
 	
 	
-	public static String creerPassword() {
-		 String uuid = UUID.randomUUID().toString().replaceAll("-", "").substring(0,9);
+	public String creerPassword(Utilisateur user) {
+		String mdp = user.getNom().substring(0,3).toUpperCase()+user.getPrenom().substring(0,3).toLowerCase()+ LocalDate.now().getYear();
+		
+		return mdp;
+		 /*String uuid = UUID.randomUUID().toString().replaceAll("-", "").substring(0,9);
 		 System.out.println(uuid);
-		 return uuid;
+		 return uuid;*/
+		
+		
 		}
 	
 	/**

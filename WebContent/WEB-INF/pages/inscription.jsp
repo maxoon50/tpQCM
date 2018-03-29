@@ -4,7 +4,7 @@
 
 	<div class="row">
 		 <div class="input-field offset-s3 col s6" id="blockInscription">
-		   	<form method="post" action="$Inscription">
+		   	<form method="post" action="${pageContext.request.contextPath}/Inscription">
 			    <h3>Inscription</h3>
 				   <div class="row">
 				     	<div class="col s4">
@@ -33,7 +33,7 @@
 				          	<label for="autocomplete-input">Email</label>
 				        </div>
 				    </div>
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col s4">
 						    <i class="material-icons ">no_encryption</i>
 						</div>
@@ -41,7 +41,7 @@
 						    <input name="password" type="text" id="autocomplete-input" class="autocomplete">
 						    <label for="autocomplete-input">Mot de Passe</label>
 						</div>
-					</div>
+					</div> -->
 					<div class="row">
 						<div class="col s4">
 						    <i class="material-icons ">fingerprint</i>

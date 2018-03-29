@@ -1,6 +1,7 @@
 package tpQCM.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import tpQCM.BusinessException;
 import tpQCM.bll.UtilisateurManager;
+import tpQCM.messages.LecteurMessage;
 
 /**
  * Servlet implementation class InscriptionServlet
@@ -54,14 +56,24 @@ public class InscriptionServlet extends HttpServlet {
 		System.out.println(role);
 		String promo=request.getParameter("promo");
 		System.out.println(promo);
-		
+		List<Integer> listeCodesErreur=new ArrayList<>();
 		UtilisateurManager userMger = new UtilisateurManager();
 		try {
-			userMger.insererUtilisateur(request);
-		} catch (BusinessException e) {
+			userMger.insererUtilisateur(request);		
+			
+		} catch (BusinessException e ) {
 			e.printStackTrace();
+			listeCodesErreur = e.getListeCodesErreur();
+			ArrayList<String>listeErreurs = new ArrayList<String>();
+			
+			for (Integer code : listeCodesErreur) {
+				listeErreurs.add(LecteurMessage.getMessageErreur(code));
+			}
+			request.setAttribute("errors",listeErreurs );
+			doGet(request,response);
 		}
 		
+		response.sendRedirect(request.getContextPath()+request.getServletPath());
 	}
 
 }

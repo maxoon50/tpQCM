@@ -3,10 +3,12 @@ package tpQCM.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
 import tpQCM.BusinessException;
+import tpQCM.bo.Promotion;
 import tpQCM.bo.Utilisateur;
 
 public class UserDAOJdbcImpl implements UserDAO {
@@ -23,6 +25,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static String RECHERCHE_NOM = "SELECT * FROM utilisateur WHERE nom LIKE ? ORDER BY nom ASC";
 	private static String DELETE_USER="DELETE FROM utilisateur WHERE idUtilisateur=?";
 	private static String SELECT_CODEPROMO="SELECT codePromo FROM promotion";
+	private static String INSERT_PROMO="INSERT INTO promotion(codePromo,Libelle) VALUES(?,?)";
 	
 	@Override
 	public void insertUser(Utilisateur user) throws BusinessException {
@@ -309,5 +312,37 @@ public class UserDAOJdbcImpl implements UserDAO {
 			throw businessException;
 		}
 		return codesPromo;
+	}
+
+	/* (non-Javadoc)
+	 * @see tpQCM.dal.UserDAO#insertPromotion(tpQCM.bo.Promotion)
+	 */
+	@Override
+	public void insertPromotion(Promotion promotion) throws BusinessException {
+		if (promotion == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessException;
+		}
+
+		int nbRows;
+		BusinessException businessException = new BusinessException();
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(INSERT_PROMO);
+			pstmt.setString(1, promotion.getCodePromo());
+			pstmt.setString(2, promotion.getLibelle());
+			nbRows = pstmt.executeUpdate();
+		}catch (SQLIntegrityConstraintViolationException sqle) {
+			sqle.printStackTrace();
+			 businessException.ajouterErreur(CodesResultatDAL.INSERT_EXIST);
+			 throw businessException;
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
+
+		}
 	}
 }
