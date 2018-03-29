@@ -1,14 +1,5 @@
 <%@include file="./parts/head.jsp" %>
-
-	<nav>
-	    <div class="nav-wrapper">
-	      <img id="logo" src="${pageContext.request.contextPath}/images/ENIEcole.jpg"/>
-	      <ul id="nav-mobile" class="right hide-on-med-and-down">
-	        <li><a href="${pageContext.request.contextPath}/formateur/ajouter-questions">Ajouter Question</a></li>
-	        <li><a href="${pageContext.request.contextPath}/logout">${sessionScope.user.prenom } / déconnection</a></li>
-	      </ul>
-	    </div>
-	</nav>
+<%@include file="./menus/menuResponsable.jsp" %>
 
 <div class="row">
 	<div class="offset-s2 col s8" id="blockSectionAjout">
