@@ -65,6 +65,17 @@ body{
 	text-align: center;
 }
 
+#blockSectionAjout{
+	margin-top: 3vh;
+	background-color: white;
+	box-shadow: 5px 10px 5px #c3c0c0;
+	padding: 5vh;
+}
+
+#blockSectionAjout h4{
+	text-align: center;
+}
+
 #logoAddTheme .material-icons{
 	pading: 20px;
 }
@@ -82,4 +93,8 @@ body{
 
 .flex{
 	display:flex;
+}
+
+#cardSection{
+	visibility: hidden;
 }
