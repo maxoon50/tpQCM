@@ -3,6 +3,7 @@ package tpQCM.dal;
 import java.util.List;
 
 import tpQCM.BusinessException;
+import tpQCM.bo.Promotion;
 import tpQCM.bo.Utilisateur;
 
 public interface UserDAO {
@@ -26,4 +27,17 @@ public interface UserDAO {
 	public List<Utilisateur> getRespForm() throws BusinessException;
 	
 	public void deleteUser(int id) throws BusinessException;
+
+	/**
+	 * methode en charge de récupérer les code Promo déja existant
+	 * @return
+	 * @throws BusinessException
+	 */
+	List<String> selectCodePromo() throws BusinessException;
+
+	/**
+	 * methode en charge de créer une nouvelle promotion
+	 * @param promotion
+	 */
+	public void insertPromotion(Promotion promotion);
 }

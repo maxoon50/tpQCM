@@ -22,6 +22,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static String UPDATE_PROFIL = "UPDATE utilisateur SET codeProfil=? WHERE idUtilisateur=?";
 	private static String RECHERCHE_NOM = "SELECT * FROM utilisateur WHERE nom LIKE ? ORDER BY nom ASC";
 	private static String DELETE_USER="DELETE FROM utilisateur WHERE idUtilisateur=?";
+	private static String SELECT_CODEPROMO="SELECT codePromo FROM promotion";
 	
 	@Override
 	public void insertUser(Utilisateur user) throws BusinessException {
@@ -285,5 +286,28 @@ public class UserDAOJdbcImpl implements UserDAO {
 		}
 
 		
+	}
+	
+	
+	@Override
+	public List<String> selectCodePromo() throws BusinessException {
+		List<String> codesPromo = new ArrayList<String>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_CODEPROMO);
+		
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				
+				codesPromo.add(rs.getString(1));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+			throw businessException;
+		}
+		return codesPromo;
 	}
 }

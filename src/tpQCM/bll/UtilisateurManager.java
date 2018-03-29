@@ -2,8 +2,12 @@ package tpQCM.bll;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import tpQCM.BusinessException;
+import tpQCM.bo.Promotion;
 import tpQCM.bo.Utilisateur;
 import tpQCM.dal.CodesResultatDAL;
 import tpQCM.dal.DAOFactory;
@@ -41,9 +45,27 @@ public class UtilisateurManager {
 	 * @param user
 	 * @throws BusinessException
 	 */
-	public void insererUtilisateur(Utilisateur user)throws BusinessException{
+	public void insererUtilisateur(HttpServletRequest request)throws BusinessException{
 		BusinessException businessException = new BusinessException();
+		// on crée un user à partir de la request
+		Utilisateur user = new Utilisateur();
+		user.setNom(request.getParameter("nom"));
+		user.setPrenom(request.getParameter("prenom"));
+		user.setEmail(request.getParameter("email"));
+		user.setCodeProfil(Integer.parseInt(request.getParameter("profil")));
 		
+		
+		//si on a la création d'une nouvelle promo dans le cadre d'un new candidat, on la crée en base 
+		if(request.getParameter("promo").equals("autre")) {
+				Promotion promotion = new Promotion(request.getParameter("codeNewPromo"),request.getParameter("nomNewPromo"));
+				this.userDAO.insertPromotion(promotion);
+		}
+		// si c'est un stagiaire, on set son code promo
+		if (user.getCodeProfil()==100) {
+			user.setCodePromo(request.getParameter("codeNewPromo"));
+		}
+		
+		user.setPassword(creerPassword());
 		this.valider(user,businessException);
 		
 		if(!businessException.hasErreurs()) {
@@ -96,8 +118,12 @@ public class UtilisateurManager {
 	
 	//public Utilisateur selectByEmailMotDePasse(String email,String motDePasse) throws BusinessException;
 	
-	/*
-	 * 
+	
+	/**
+	 * methode en charge de récupérer tous les stagiaires d'une promotion
+	 * @param promo
+	 * @return
+	 * @throws BusinessException
 	 */
 	public List<Utilisateur>getPromotion(String promo) throws BusinessException{
 		List<Utilisateur> liste = new ArrayList<Utilisateur>();
@@ -175,6 +201,18 @@ public class UtilisateurManager {
 		this.userDAO.deleteUser(id);
 	}
 	
+	
+	public List<String> getAllCodePromo() throws BusinessException{
+		return this.userDAO.selectCodePromo();
+	}
+	
+	
+	
+	public static String creerPassword() {
+		 String uuid = UUID.randomUUID().toString().replaceAll("-", "").substring(0,9);
+		 System.out.println(uuid);
+		 return uuid;
+		}
 	
 	/**
 	 * methode en charge de valider les données
