@@ -18,17 +18,17 @@
 				<div class="input-field col s6">			
 					<select name="theme">
 					    <option disabled selected>Selectionnez le thème</option>
-					    <c:forEach items="${ theme }" var="t">
-					    	<option  value="${t.idTheme}">${ t.libelle }</option>
+					    <c:forEach items="${ themes }" var="t">
+					    	<option  value="${t.key}">${ t.key }</option>
 					    </c:forEach> 
 					</select>
 				</div>
 				<div class="input-field col s6">
-					<c:forEach items="${themes }" var="t">
-					    <p class="range-field">
-					      <input data-${t.key }="${ t.value }" name="nbSection" type="range" id="test5" min="0" max="${ t.value }" />
-					    </p>
-				    </c:forEach>		
+						<p class="range-field">
+							
+						 	<input <c:forEach items="${themes }" var="t"> data-${t.key }="${ t.value }" </c:forEach> name="nbSection" type="range" id="test5" min="0" max="${ t.value }" />
+							
+						</p>	
 				</div>
 			</div>
 			<div class="row">
