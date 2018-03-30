@@ -12,7 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import tpQCM.BusinessException;
 import tpQCM.bll.UtilisateurManager;
+import tpQCM.bo.Section;
+import tpQCM.bo.Test;
 import tpQCM.bo.Utilisateur;
+import tpQCM.dal.TestDAOJdbcImpl;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -31,13 +34,13 @@ public class LoginServlet extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		String email = request.getParameter("email");
-		System.out.println(email);
 		String password = request.getParameter("password");
-		System.out.println(password);
 		Utilisateur user = null;
 		UtilisateurManager userMger = new UtilisateurManager();
 		RequestDispatcher rd;
+		
 		try {
 			user = userMger.login(email, password);
 			HttpSession session = request.getSession();
