@@ -105,6 +105,12 @@ public class Test {
 	public void addSection(Section section) {
 		this.listeSections.add(section);
 	}
+
+	@Override
+	public String toString() {
+		return "Test [idTest=" + idTest + ", libelle=" + libelle + ", description=" + description + ", duree=" + duree
+				+ ", seuil_haut=" + seuil_haut + ", seuil_bas=" + seuil_bas + ", listeSections=" + listeSections + "]";
+	}
 	
 	
 	
