@@ -28,9 +28,17 @@ import tpQCM.dal.TestDAOJdbcImpl;
  * @date 30 mars 2018
  * @version tpQCM v1.0
  */
+/**
+ * classe en charge de faire
+ * @author mleroux2017
+ * @date 30 mars 2018
+ * @version tpQCM v1.0
+ */
 public class EpreuveManager {
 
 	private EpreuveDAO epreuveDAO;
+	
+	// TODO Enlever le test DAO et créer un appel au TEST manager
 	private TestDAO testDAO;
 
 	public EpreuveManager() {
@@ -74,7 +82,24 @@ public class EpreuveManager {
 		
 		
 	}
-	public List<Epreuve> getEpreuveByCandidat(int idCandidat);
+	
+	
+	/**
+	 * methode en charge de récupérer toutes les épreuves auxquelles est inscrit un candidat
+	 * @param idCandidat
+	 * @return
+	 */
+	public List<Epreuve> getEpreuveByCandidat(int idCandidat){
+		List<Epreuve> liste = new ArrayList<Epreuve>();
+		try {
+			liste =this.epreuveDAO.getEpreuvesByCandidat(idCandidat);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return liste;
+	}
+	
+	
 	
 	// getEpreuvebyId pour lancer épreuve et récupérer sa liste de questionstirage
 }
