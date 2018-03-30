@@ -18,13 +18,12 @@ import tpQCM.messages.LecteurMessage;
 /**
  * Servlet implementation class InscriptionServlet
  */
-@WebServlet("/Inscription")
+@WebServlet("/responsable/inscription")
 public class InscriptionServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtilisateurManager userMger = new UtilisateurManager();
 		
@@ -40,22 +39,16 @@ public class InscriptionServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		String nom=request.getParameter("nom");
-		System.out.println(nom);
 		String prenom=request.getParameter("prenom");
-		System.out.println(prenom);
 		String email=request.getParameter("email");
-		System.out.println(email);
 		String password=request.getParameter("password");
-		System.out.println(password);
 		String role=request.getParameter("profil");
-		System.out.println(role);
 		String promo=request.getParameter("promo");
-		System.out.println(promo);
+		
 		List<Integer> listeCodesErreur=new ArrayList<>();
 		UtilisateurManager userMger = new UtilisateurManager();
 		try {

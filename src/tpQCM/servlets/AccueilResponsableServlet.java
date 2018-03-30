@@ -12,24 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AccueilResponsableServlet
  */
-@WebServlet("/AccueilResponsable")
+@WebServlet("/responsable/accueilresponsable")
 public class AccueilResponsableServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd= request.getRequestDispatcher("WEB-INF/pages/accueilResponsable.jsp");
+		RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/pages/accueilResponsable.jsp");
 		rd.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+
 
 }
