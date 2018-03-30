@@ -1,5 +1,8 @@
 package tpQCM.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Test {
 
 	private int idTest;
@@ -8,6 +11,7 @@ public class Test {
 	private int duree; //duree max de pour ce test
 	private int seuil_haut;
 	private int seuil_bas;
+	private List<Section> sections=new ArrayList<Section>();
 	
 	public Test() {
 		super();
@@ -17,6 +21,13 @@ public class Test {
 	/*
 	 * constructeur sans id pour insertion en base
 	 */
+	public Test(String libelle, int duree, List<Section> sections) {
+		this.libelle = libelle;
+		this.duree = duree;
+		this.sections=sections;
+	}
+	
+	
 	public Test(String libelle, String description, int duree, int seuil_haut, int seuil_bas) {
 		super();
 		this.libelle = libelle;

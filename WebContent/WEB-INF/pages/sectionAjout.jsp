@@ -26,6 +26,7 @@
 			</div>
 			<div class="row">
 				<div class="offset-s4 col s4">
+					
 					<button class="btn waves-effect waves-light" type="submit" name="action">Générer
 					    <i class="material-icons right">send</i>
 					</button>
@@ -34,7 +35,7 @@
 		</form>
 	</div>
 </div>
-<form method="post" action="${pageContext.request.contextPath}/ListeSection">
+<form method="post" action="${pageContext.request.contextPath}/test-recapitulatif">
 	
 	<div class="row">
 		<div class="offset-s2 col s8" id="blockSectionAjout">
@@ -42,14 +43,14 @@
 				<h4 style="text-align:center">Test</h4>
 				<div class="">
 					<div class="input-field col s12">
-				          <textarea id="textarea1" class="materialize-textarea"></textarea>
+				          <textarea name="libelleTest" type="textarea" id="textarea1" class="materialize-textarea"></textarea>
 				          <label for="textarea1">Libellé</label>
 			        </div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="offset-s4 col s4">
-					<select>
+					<select name="dureeTest">
 				      <option value="" disabled selected>Durée du test</option>
 				      <option value="1">1 heure</option>
 				      <option value="2">2 heures</option>
@@ -70,8 +71,8 @@
 							    	<h5 style="text-align:center"><c:out value="${s.theme }"></c:out></h5>
 							    	<div class="row">
 							    		<div class="offset-s2 col 8"> 		
-								    		<p class="range-field">					    	
-								     			<a class="waves-effect waves-light btn"><i class="material-icons right">help_outline</i>${s.nbQuestionsATirer}</a>
+								    		<p class="range-field">		
+								    			<div class="card-panel teal #f1f8e9 light-green lighten-5">${s.nbQuestionsATirer} Question(s)</div>			    	
 								     		</p>
 								     	</div>
 								   	</div>
