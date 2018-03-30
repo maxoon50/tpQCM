@@ -5,10 +5,18 @@ public class Section {
 	private int nbQuestionsATirer;
 	private int idTest;
 	private int idTheme;
+	private String theme;
 	
 	public Section() {
 		super();
 		
+	}
+	
+	public Section(int nbQuestionsATirer, int idTheme, String theme) {
+		super();
+		this.nbQuestionsATirer = nbQuestionsATirer;
+		this.idTheme = idTheme;
+		this.theme=theme;
 	}
 
 	public Section(int nbQuestionsATirer, int idTest, int idTheme) {
@@ -40,6 +48,14 @@ public class Section {
 
 	public void setIdTheme(int idTheme) {
 		this.idTheme = idTheme;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 	
 	
