@@ -28,7 +28,7 @@ public class Test {
 	public Test(String libelle,int duree) {
 		this();
 		this.libelle = libelle;
-		this.duree = dureeEnSecondes(duree);
+		this.duree =dureeEnSecondes(duree);
 	}
 
 
@@ -43,7 +43,7 @@ public class Test {
 	 * @return
 	 */
 	private int dureeEnSecondes(int duree2) {
-		return duree*60*60;
+		return duree2*60*60;
 	}
 	
 	public int getIdTest() {

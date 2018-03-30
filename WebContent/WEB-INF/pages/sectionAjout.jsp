@@ -35,7 +35,7 @@
 		</form>
 	</div>
 </div>
-<form method="post" action="${pageContext.request.contextPath}/test-recapitulatif">
+<form method="post" action="${pageContext.request.contextPath}/formateur/test-recapitulatif">
 	
 	<div class="row">
 		<div class="offset-s2 col s8" id="blockSectionAjout">
