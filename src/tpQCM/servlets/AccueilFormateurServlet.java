@@ -19,13 +19,11 @@ import tpQCM.bo.Theme;
 /**
  * Servlet implementation class AccueilFormateurServlet
  */
-@WebServlet("/AccueilFormateur")
+@WebServlet("/formateur/accueil-formateur")
 public class AccueilFormateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//instanciation du manager
 		ReferentielManager rm= new ReferentielManager();
@@ -35,7 +33,6 @@ public class AccueilFormateurServlet extends HttpServlet {
 		try {
 			listeTheme=rm.getAllThemes();
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("theme", listeTheme);
@@ -56,7 +53,6 @@ public class AccueilFormateurServlet extends HttpServlet {
 		try {
 			listeTheme=rm.getAllThemes();
 		} catch (BusinessException e) {
-					// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("theme", listeTheme);
@@ -73,7 +69,6 @@ public class AccueilFormateurServlet extends HttpServlet {
 		try {
 			listeQuestion=rm.getQuestionsByTheme(idTheme);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("questions", listeQuestion);

@@ -1,5 +1,8 @@
 package tpQCM.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Test {
 
 	private int idTest;
@@ -8,41 +11,41 @@ public class Test {
 	private int duree; //duree max de pour ce test
 	private int seuil_haut;
 	private int seuil_bas;
+	private List<Section> listeSections ;
 	
+
 	public Test() {
 		super();
-		
+		this.seuil_haut = 12;
+		this.seuil_bas = 8;
+		this.description = "test";
+		this.listeSections = new ArrayList<Section>();
 	}
 
 	/*
 	 * constructeur sans id pour insertion en base
 	 */
-	public Test(String libelle, String description, int duree, int seuil_haut, int seuil_bas) {
-		super();
+	public Test(String libelle,int duree) {
+		this();
 		this.libelle = libelle;
-		this.description = description;
-		this.duree = duree;
-		this.seuil_haut = seuil_haut;
-		this.seuil_bas = seuil_bas;
+		this.duree = dureeEnSecondes(duree);
 	}
 
 
-
-
-	public Test(int idTest, String libelle, String description, int duree, int seuil_haut, int seuil_bas) {
-		super();
-		this.idTest = idTest;
-		this.libelle = libelle;
-		this.description = description;
-		this.duree = duree;
-		this.seuil_haut = seuil_haut;
-		this.seuil_bas = seuil_bas;
+	public Test(int idTest, String libelle, int duree) {
+		this();
+		this.duree = dureeEnSecondes(duree);
 	}
 
-
-
-
-
+	/**
+	 * Méthode en charge de  transformer les heures en secondes
+	 * @param duree2
+	 * @return
+	 */
+	private int dureeEnSecondes(int duree2) {
+		return duree*60*60;
+	}
+	
 	public int getIdTest() {
 		return idTest;
 	}
@@ -89,6 +92,18 @@ public class Test {
 
 	public void setSeuil_bas(int seuil_bas) {
 		this.seuil_bas = seuil_bas;
+	}
+
+	public List<Section> getListeSections() {
+		return listeSections;
+	}
+
+	public void setListeSections(List<Section> listeSections) {
+		this.listeSections = listeSections;
+	}
+	
+	public void addSection(Section section) {
+		this.listeSections.add(section);
 	}
 	
 	

@@ -19,17 +19,18 @@ import tpQCM.messages.LecteurMessage;
 
 @WebServlet("/formateur/ajouter-questions")
 public class AjoutQuestionServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
-
     public AjoutQuestionServlet() {
         super();
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/questionsAjouter.jsp");
 		ReferentielManager manager = new ReferentielManager();
+	
 		try {
 			List<Theme> listeTheme = manager.getAllThemes();
 			request.setAttribute("themes", listeTheme);
