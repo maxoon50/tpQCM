@@ -57,6 +57,12 @@ public class Section {
 	public void setTheme(String theme) {
 		this.theme = theme;
 	}
+
+	@Override
+	public String toString() {
+		return "Section [nbQuestionsATirer=" + nbQuestionsATirer + ", idTest=" + idTest + ", idTheme=" + idTheme
+				+ ", theme=" + theme + "]";
+	}
 	
 	
 	
