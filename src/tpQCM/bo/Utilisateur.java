@@ -1,6 +1,8 @@
 package tpQCM.bo;
 
-public class Utilisateur {
+import java.io.Serializable;
+
+public class Utilisateur  implements Serializable{
 
 	private int idUtilisateur;
 	private String nom;
@@ -12,7 +14,6 @@ public class Utilisateur {
 	
 	public Utilisateur() {
 		super();
-		
 	}
 	
 	/*

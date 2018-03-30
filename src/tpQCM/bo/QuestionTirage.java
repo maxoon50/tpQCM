@@ -1,6 +1,8 @@
 package tpQCM.bo;
 
-public class QuestionTirage {
+import java.io.Serializable;
+
+public class QuestionTirage implements Serializable {
 	boolean estMarquee;
 	int idQuestion;
 	int numOrdre;

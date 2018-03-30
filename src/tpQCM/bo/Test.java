@@ -1,9 +1,10 @@
 package tpQCM.bo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Test {
+public class Test implements Serializable {
 
 	private int idTest;
 	private String libelle;

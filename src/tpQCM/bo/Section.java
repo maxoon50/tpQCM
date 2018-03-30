@@ -1,6 +1,8 @@
 package tpQCM.bo;
 
-public class Section {
+import java.io.Serializable;
+
+public class Section implements Serializable {
 
 	private int nbQuestionsATirer;
 	private int idTest;
