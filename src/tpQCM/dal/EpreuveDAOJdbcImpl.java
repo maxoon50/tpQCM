@@ -6,13 +6,9 @@ package tpQCM.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
-
-import fr.eni.javaee.gestionlistescourses.dal.CodesResultatDAL;
 import tpQCM.BusinessException;
 import tpQCM.bo.Epreuve;
 import tpQCM.bo.QuestionTirage;
@@ -28,7 +24,7 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 	
 	
 	private static String SELECT_ALL_EPV_CDT="SELECT * FROM epreuve WHERE idUtilisateur = ?;";
-	private static String INSERT_EPREUVE="INSERT INTO epreuve(dateDebutValidite,dateFinValidite,idTest,idUtilisateur)VALUES(?,?,?,?);";
+	private static String INSERT_EPREUVE="INSERT INTO epreuve(dateDedutValidite,dateFinValidite,idTest,idUtilisateur)VALUES(?,?,?,?);";
 	private static String INSERT_QUESTION_TIRAGE="INSERT INTO question_tirage(estMarquee,idQuestion,numordre,idEpreuve) VALUES(?,?,?,?)";
 	@Override
 	public List<Epreuve> getEpreuvesByCandidat(int idCandidat) throws BusinessException {
@@ -77,7 +73,6 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			
 			try {
-				cnx.setAutoCommit(false);
 				if (epreuve.getIdEpreuve() == 0) {
 					
 					
@@ -101,21 +96,19 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 				}
 				if(epreuve.getQuestionsTirage().size()>0)
 				{
-					PreparedStatement pstmt2 = cnx.prepareStatement(INSERT_QUESTION_TIRAGE);
+					PreparedStatement pstmt2 = cnx.prepareStatement(INSERT_QUESTION_TIRAGE,PreparedStatement.RETURN_GENERATED_KEYS);
 					for (QuestionTirage questionTirage : epreuve.getQuestionsTirage()) {
 						pstmt2.setBoolean(1, questionTirage.isEstMarquee());
 						pstmt2.setInt(2,questionTirage.getIdQuestion());
 						pstmt2.setInt(3,questionTirage.getNumOrdre());
-						pstmt2.setInt(4,questionTirage.getIdEpreuve());
+						pstmt2.setInt(4,epreuve.getIdEpreuve());
 						pstmt2.executeUpdate();
 					}
 						pstmt2.close();
 				}
-				cnx.commit();
 				
 			}catch(Exception e)	{
 					e.printStackTrace();
-					cnx.rollback();
 					throw e;
 			}
 		} catch (Exception e) {

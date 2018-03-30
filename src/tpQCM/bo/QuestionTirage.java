@@ -19,6 +19,18 @@ public class QuestionTirage {
 		this.idEpreuve = idEpreuve;
 	}
 	
+	/**
+	 * constucteur pour QuestionTirage.java
+	 * @param idQuestion2
+	 * @param index
+	 */
+	public QuestionTirage(int idQuestion2, int index) {
+		this.estMarquee = false;
+		this.idQuestion = idQuestion2;
+		this.numOrdre = index;
+	}
+	
+
 	public boolean isEstMarquee() {
 		return estMarquee;
 	}

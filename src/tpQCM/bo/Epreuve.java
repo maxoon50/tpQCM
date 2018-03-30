@@ -33,6 +33,20 @@ public class Epreuve {
 		this.idUtilisateur = idUtilisateur;
 	}
 
+	/**
+	 * constucteur pour Epreuve.java
+	 * @param idCandidat
+	 * @param idTest2
+	 * @param debut
+	 * @param fin
+	 */
+	public Epreuve(int idCandidat, int idTest, Date debut, Date fin) {
+		this.dateDebutValidite = debut;
+		this.dateFinValidite = fin;
+		this.idTest = idTest;
+		this.idUtilisateur = idCandidat;
+	}
+
 	public int getIdEpreuve() {
 		return idEpreuve;
 	}
