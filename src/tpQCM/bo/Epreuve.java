@@ -1,9 +1,11 @@
 package tpQCM.bo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Epreuve {
+public class Epreuve implements Serializable{
+	
 	int idEpreuve;
 	Date dateDebutValidite;
 	Date dateFinValidite;

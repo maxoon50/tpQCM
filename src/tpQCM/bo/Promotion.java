@@ -1,8 +1,9 @@
 package tpQCM.bo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Promotion {
+public class Promotion implements Serializable {
 	
 	private String codePromo;
 	private String libelle;

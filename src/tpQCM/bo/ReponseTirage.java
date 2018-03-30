@@ -1,6 +1,8 @@
 package tpQCM.bo;
 
-public class ReponseTirage {
+import java.io.Serializable;
+
+public class ReponseTirage implements Serializable {
 	int idProposition;
 	int idQuestion;
 	int idEpreuve;

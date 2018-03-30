@@ -1,13 +1,12 @@
 package tpQCM.bo;
 
-public class Theme {
+import java.io.Serializable;
+
+public class Theme implements Serializable {
 
 	private int idTheme;
 	private String libelle;
-	
-	
-	
-	
+
 	public Theme() {
 		super();
 		

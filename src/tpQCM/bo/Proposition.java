@@ -1,6 +1,8 @@
 package tpQCM.bo;
 
-public class Proposition {
+import java.io.Serializable;
+
+public class Proposition implements Serializable {
 	int idProposition;
 	String enonce;
 	boolean estBonne;
