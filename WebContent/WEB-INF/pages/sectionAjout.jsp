@@ -43,7 +43,7 @@
 				<h4 style="text-align:center">Test</h4>
 				<div class="">
 					<div class="input-field col s12">
-				          <textarea name="libelleTest" type="textarea" id="textarea1" class="materialize-textarea"></textarea>
+				          <textarea name="libelleTest" id="textarea1" class="materialize-textarea"></textarea>
 				          <label for="textarea1">Libellé</label>
 			        </div>
 				</div>

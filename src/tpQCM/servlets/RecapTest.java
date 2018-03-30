@@ -14,7 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Session;
 
+import tpQCM.bll.EpreuveManager;
+import tpQCM.bll.ReferentielManager;
 import tpQCM.bo.Section;
+import tpQCM.bo.Test;
 
 
 @WebServlet("/formateur/test-recapitulatif")
@@ -38,18 +41,22 @@ public class RecapTest extends HttpServlet {
 		String libelle;
 		String duree;
 		int dureeTest;
-		
-		
-		List<Section> listesection=new ArrayList<Section>();
+		Test newTest;
+		List<Section> listeSection=new ArrayList<Section>();
 		HttpSession session = req.getSession();
 		
 		libelle= req.getParameter("libelleTest");
 		duree= req.getParameter("dureeTest");
 		dureeTest=Integer.parseInt(duree);
-		listesection=(List<Section>) session.getAttribute("sections");
-		for(Section s: listesection) {
+		listeSection=(List<Section>) session.getAttribute("sections");
+		for(Section s: listeSection) {
 			System.out.println(s.getTheme());
 		}
+		newTest= new Test(libelle, dureeTest);
+		newTest.setListeSections(listeSection);
+
+		req.setAttribute("test", newTest);
+		
 		
 		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/pages/recapitulatifTest.jsp");
 		rd.forward(req, resp);
