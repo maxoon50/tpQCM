@@ -31,11 +31,12 @@ import tpQCM.dal.UserDAO;
  */
 public class UtilisateurManager {
 	
+	private UserDAO userDAO;
+	
+	
 	/*
 	 * Constructeur
 	 */
-	private UserDAO userDAO;
-	
 	public UtilisateurManager() {
 		this.userDAO = DAOFactory.getUSerDAO();
 		

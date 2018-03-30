@@ -1,6 +1,7 @@
 package tpQCM.bo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Epreuve {
 	int idEpreuve;
@@ -12,6 +13,7 @@ public class Epreuve {
 	String niveauObtenu;
 	int idTest;
 	int idUtilisateur;	
+	List<QuestionTirage> questionsTirage;
 	
 	public Epreuve() {
 		super();
@@ -108,6 +110,14 @@ public class Epreuve {
 		return "Epreuve [idEpreuve=" + idEpreuve + ", dateDebutValidite=" + dateDebutValidite + ", dateFinValidite="
 				+ dateFinValidite + ", tempsEcoule=" + tempsEcoule + ", etat=" + etat + ", noteObtenue=" + noteObtenue
 				+ ", niveauObtenu=" + niveauObtenu + ", idTest=" + idTest + ", idUtilisateur=" + idUtilisateur + "]";
+	}
+
+	public List<QuestionTirage> getQuestionsTirage() {
+		return questionsTirage;
+	}
+
+	public void setQuestionsTirage(List<QuestionTirage> questionsTirage) {
+		this.questionsTirage = questionsTirage;
 	}
 	
 	
