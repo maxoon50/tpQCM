@@ -29,7 +29,7 @@ public class Test implements Serializable {
 	public Test(String libelle,int duree) {
 		this();
 		this.libelle = libelle;
-		this.duree = dureeEnSecondes(duree);
+		this.duree =dureeEnSecondes(duree);
 	}
 
 
@@ -44,7 +44,7 @@ public class Test implements Serializable {
 	 * @return
 	 */
 	private int dureeEnSecondes(int duree2) {
-		return duree*60*60;
+		return duree2*60*60;
 	}
 	
 	public int getIdTest() {

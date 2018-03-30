@@ -17,4 +17,9 @@ public static ReferentielDAO getReferentielDAO() {
 public static EpreuveDAO getEpreuveDAO() {
 	return new EpreuveDAOJdbcImpl();
 }
+
+public static TestDAO getTestDAO() {
+	return new TestDAOJdbcImpl();
+}
+
 }

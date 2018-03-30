@@ -52,7 +52,7 @@ public class TestDAOJdbcImpl implements TestDAO {
 			pst.setString(2, test.getDescription());
 			pst.setInt(3, test.getDuree());
 			pst.setInt(4, test.getSeuil_haut());
-			pst.setInt(5, test.getSeuil_haut());
+			pst.setInt(5, test.getSeuil_bas());
 			
 			pst.executeUpdate();
 			ResultSet rs = pst.getGeneratedKeys();
