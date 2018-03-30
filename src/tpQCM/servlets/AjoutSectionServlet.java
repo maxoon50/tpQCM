@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import tpQCM.BusinessException;
 import tpQCM.bll.ReferentielManager;
 import tpQCM.bo.Question;
+import tpQCM.bo.Section;
 import tpQCM.bo.Theme;
 
 /**
@@ -78,31 +79,37 @@ public class AjoutSectionServlet extends HttpServlet {
 		
 		theme=request.getParameter("theme");
 		idTheme=Integer.parseInt(theme);
+		System.out.println(idTheme);
 		question=request.getParameter("nbQuestion");
 		nbQuestion=Integer.parseInt(question);
 		
-		Theme t= new Theme();
-		try {
-			t=rm.getThemeById(idTheme);
-		} catch (BusinessException e) {
-			e.printStackTrace();
+		if(nbQuestion !=0 && idTheme != 666) {
+			Theme t= new Theme();
+			try {
+				t=rm.getThemeById(idTheme);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
+			Section section= new Section(nbQuestion, idTheme, t.getLibelle());
+			HttpSession session = request.getSession();
+			List<Section> listeLibelleSection ;
+			List<Integer> listeNbQuestion= new ArrayList<Integer>();
+			
+		
+		
+			listeNbQuestion.add(nbQuestion);
+			
+			if(session.getAttribute("sections")==null) {
+				listeLibelleSection = new ArrayList<Section>();
+			}else{
+				listeLibelleSection=new ArrayList<Section>();
+				listeLibelleSection=(List<Section>) session.getAttribute("sections");
+			}
+			listeLibelleSection.add(section);
+		
+			//mise en session des infos
+			session.setAttribute("sections", listeLibelleSection);
 		}
-		
-		HttpSession session = request.getSession();
-		List<String> listeLibelleSection = null;
-		List<Integer> listeNbQuestion= new ArrayList<Integer>();
-		listeNbQuestion.add(nbQuestion);
-		
-		if(listeLibelleSection == null) {
-			listeLibelleSection = new ArrayList<String>();
-			listeLibelleSection.add(t.getLibelle());
-		}else{
-			listeLibelleSection.add(t.getLibelle());
-		}
-		
-		//mise en session des infos
-		session.setAttribute("libelle", listeLibelleSection);		
-		session.setAttribute("nbQuestion", nbQuestion);
 		
 		List<Theme> listeTheme=new ArrayList<Theme>();
 		
