@@ -98,14 +98,14 @@ public class TestDAOJdbcImpl implements TestDAO {
 			
 			if(rs.next()) {
 				
-				test = new Test( id ,rs.getString("libelle"),rs.getInt("duree"));
-				
+				test = new Test(id,rs.getString("libelle"),rs.getInt("duree"));
+				System.out.println("boucle test :"+test);
 				pst = conn.prepareStatement(GET_SECTIONS_TEST);
 				pst.setInt(1, id);
 				ResultSet rs2 = pst.executeQuery();
 				
 				while(rs2.next()) {
-					Section section = new Section(rs2.getInt("nbQuestionsATirer"),  id , rs2.getInt("idTheme"));
+					Section section = new Section(rs2.getInt("nbQuestionsATirer"), id , rs2.getInt("idTheme"));
 					test.addSection(section);
 				}
 				
@@ -119,7 +119,7 @@ public class TestDAOJdbcImpl implements TestDAO {
 			businessExc.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
 			throw businessExc;
 		}
-		
+		System.out.println("dal :"+test);
 		return test;
 	}
 

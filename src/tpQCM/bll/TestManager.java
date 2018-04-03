@@ -31,10 +31,11 @@ public class TestManager {
 	
 	public Test getTestById(int id) throws BusinessException{
 		BusinessException businessExc = new BusinessException();
-		Test test=new Test();
+		Test test=null;
 		try {
 			if(id != 0 ) {
 				test=dao.getTestByID(id);
+				System.out.println("bll: "+test);
 			}else {
 				throw businessExc;
 			}

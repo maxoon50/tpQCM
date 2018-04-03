@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import tpQCM.BusinessException;
@@ -22,12 +23,11 @@ import tpQCM.bo.QuestionTirage;
 public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 
 	
-	
-	private static String SELECT_ALL_EPV_CDT="SELECT * FROM epreuve WHERE idUtilisateur = ?;";
+	private static String SELECT_ALL_EPV_CDT="SELECT * FROM epreuve WHERE idUtilisateur = ? AND dateDedutValidite<=? AND dateFinValidite>=?;";
 	private static String INSERT_EPREUVE="INSERT INTO epreuve(dateDedutValidite,dateFinValidite,idTest,idUtilisateur)VALUES(?,?,?,?);";
 	private static String INSERT_QUESTION_TIRAGE="INSERT INTO question_tirage(estMarquee,idQuestion,numordre,idEpreuve) VALUES(?,?,?,?)";
 	@Override
-	public List<Epreuve> getEpreuvesByCandidat(int idCandidat) throws BusinessException {
+	public List<Epreuve> getEpreuvesByCandidatByDate(int idCandidat, Date date) throws BusinessException {
 		
 		List<Epreuve> listeEpreuves = new ArrayList<Epreuve>();
 		
@@ -42,6 +42,8 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_EPV_CDT);
 			pstmt.setInt(1, idCandidat);
+			pstmt.setDate(2,new java.sql.Date(date.getTime()));
+			pstmt.setDate(3,new java.sql.Date(date.getTime()));
 			rs= pstmt.executeQuery();
 			
 			while (rs.next()){

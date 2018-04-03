@@ -27,24 +27,27 @@
 	        </thead>
 	
 	        <tbody>
-	          	<tr>
-	            	<td>ECF Java EE</td>
+	        	 <c:forEach items="${listeEpreuves}" var ="e" varStatus="loop">
+	        	 <tr>
+	            	<td>${listeTests[loop.index].libelle }</td>
 	            	<td>
 	            		<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Description</a>
-						<div id="modal1" class="modal">
+						<div id="${listeEpreuve.loop.index }" class="modal"> 
 						    <div class="modal-content">
 						      	<h4>Description</h4>
-						      	<p>Texte descriptif</p>
+						      	<p>${listeTests[loop.index].description }</p>
 						    </div>
 						   	<div class="modal-footer">
 						   		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
 						    </div>
 						 </div>
 					</td>
-	            	<td>2h00</td>
+	            	<td>${listeTests[loop.index].duree }</td>
 	            	<td>  
-						<a href="" class="waves-effect waves-light btn red"><i class="material-icons left">access_time</i>Débuter</a>					</td>
+						<a href="" class="waves-effect waves-light btn red"><i class="material-icons left">access_time</i>Débuter</a></td>
 	          	</tr>
+        	</c:forEach>
+	          	
 	        </tbody>
 	      </table>
      </div>  

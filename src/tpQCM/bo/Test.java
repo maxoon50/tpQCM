@@ -35,6 +35,8 @@ public class Test implements Serializable {
 
 	public Test(int idTest, String libelle, int duree) {
 		this();
+		this.idTest = idTest;
+		this.libelle = libelle;
 		this.duree = dureeEnSecondes(duree);
 	}
 
