@@ -59,6 +59,29 @@ public class ReferentielManager {
 		return question;
 	}
 	
+	//////////get Question by id //////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public Question getQuestionById(int id)throws BusinessException {
+		
+		Question question = null;
+		BusinessException businessExc = new BusinessException();
+		
+		try {
+			if(id != 0) {
+				question = dao.getQuestionById(id);
+			}else {		
+				businessExc.ajouterErreur(CodesResultatBLL.OBJET_NULL);
+				throw businessExc;
+			}
+			
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return question;
+	}
+	
 	///////////removeQuestion//////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public int removeQuestion(int id) throws BusinessException{
