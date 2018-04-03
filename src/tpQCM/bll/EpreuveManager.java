@@ -119,7 +119,5 @@ public class EpreuveManager {
 		return epreuve;
 	}
 	
-	
-	
-	// getEpreuvebyId pour lancer épreuve et récupérer sa liste de questionstirage
+
 }

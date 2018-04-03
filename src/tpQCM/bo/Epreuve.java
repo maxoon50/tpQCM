@@ -1,6 +1,7 @@
 package tpQCM.bo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class Epreuve implements Serializable{
 		this.niveauObtenu = niveauObtenu;
 		this.idTest = idTest;
 		this.idUtilisateur = idUtilisateur;
+		this.questionsTirage = new ArrayList<QuestionTirage>();
 	}
 
 	/**
@@ -47,6 +49,7 @@ public class Epreuve implements Serializable{
 		this.dateFinValidite = fin;
 		this.idTest = idTest;
 		this.idUtilisateur = idCandidat;
+		this.questionsTirage = new ArrayList<QuestionTirage>();
 	}
 
 	public int getIdEpreuve() {
@@ -109,6 +112,14 @@ public class Epreuve implements Serializable{
 		return idTest;
 	}
 
+	@Override
+	public String toString() {
+		return "Epreuve [idEpreuve=" + idEpreuve + ", dateDebutValidite=" + dateDebutValidite + ", dateFinValidite="
+				+ dateFinValidite + ", tempsEcoule=" + tempsEcoule + ", etat=" + etat + ", noteObtenue=" + noteObtenue
+				+ ", niveauObtenu=" + niveauObtenu + ", idTest=" + idTest + ", idUtilisateur=" + idUtilisateur
+				+ ", questionsTirage=" + questionsTirage + "]";
+	}
+
 	public void setIdTest(int idTest) {
 		this.idTest = idTest;
 	}
@@ -121,15 +132,14 @@ public class Epreuve implements Serializable{
 		this.idUtilisateur = idUtilisateur;
 	}
 
-	@Override
-	public String toString() {
-		return "Epreuve [idEpreuve=" + idEpreuve + ", dateDebutValidite=" + dateDebutValidite + ", dateFinValidite="
-				+ dateFinValidite + ", tempsEcoule=" + tempsEcoule + ", etat=" + etat + ", noteObtenue=" + noteObtenue
-				+ ", niveauObtenu=" + niveauObtenu + ", idTest=" + idTest + ", idUtilisateur=" + idUtilisateur + "]";
-	}
+
 
 	public List<QuestionTirage> getQuestionsTirage() {
 		return questionsTirage;
+	}
+	
+	public void addQuestionTirage(QuestionTirage q){
+		this.questionsTirage.add(q);
 	}
 
 	public void setQuestionsTirage(List<QuestionTirage> questionsTirage) {
