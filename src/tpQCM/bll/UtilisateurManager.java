@@ -219,6 +219,9 @@ public class UtilisateurManager {
 	}
 	
 	
+	public List<Utilisateur> getExterne() throws BusinessException{
+		return this.userDAO.getExterne();
+	}
 	
 	public String creerPassword(Utilisateur user) {
 		String mdp = user.getNom().substring(0,3).toUpperCase()+user.getPrenom().substring(0,3).toLowerCase()+ LocalDate.now().getYear();

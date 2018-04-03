@@ -1,5 +1,8 @@
 package tpQCM.bll;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tpQCM.BusinessException;
 import tpQCM.bo.Test;
 import tpQCM.dal.DAOFactory;
@@ -43,5 +46,11 @@ public class TestManager {
 			throw e;
 		}
 		return test;
+	}
+	
+	public List<Test> getAllTests() throws BusinessException{
+		BusinessException businessExc = new BusinessException();
+		ArrayList<Test> listeTests = new ArrayList<Test>();
+		return this.dao.getAllTests();
 	}
 }

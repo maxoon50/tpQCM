@@ -12,4 +12,5 @@ package tpQCM.servlets;
 public class CodesResultatServlet {
 
 	public static final int CODE_PROMO_EXISTE=100007;
-}
+	
+	public static final int ERROR_CAST_DATE = 30000;}

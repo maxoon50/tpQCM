@@ -40,6 +40,17 @@ public class Test implements Serializable {
 		this.duree = dureeEnSecondes(duree);
 	}
 
+	
+
+	public Test(int idTest, String libelle, String description, int duree, int seuil_haut, int seuil_bas)
+			{
+		this(idTest,libelle,duree);
+		this.description = description;
+		this.seuil_haut = seuil_haut;
+		this.seuil_bas = seuil_bas;
+		
+	}
+
 	/**
 	 * Méthode en charge de  transformer les heures en secondes
 	 * @param duree2

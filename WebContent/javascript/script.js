@@ -41,7 +41,7 @@
     	$(".cache-new-promo").addClass("hide");
   	}
     });
-    
+
  
   
   });

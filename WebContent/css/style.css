@@ -131,3 +131,11 @@ body{
     text-align: center;
     color: white;
 }
+
+#blockInscriptionEpreuve {
+	margin-top: 10vh;
+	background-color: white;
+	box-shadow: 5px 10px 5px #c3c0c0;
+	padding: 5vh;
+
+}

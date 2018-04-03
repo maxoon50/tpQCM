@@ -48,7 +48,7 @@
 						</div>
 						<div class="input-field col s8">
 							<select id="inscr-select-profil" name="profil">
-							   <option value="" disabled selected>Selectionnez le rï¿½le</option>
+							   <option value="" disabled selected>Selectionnez le profil</option>
 							   <option  value="100">Stagiaire</option>
 							   <option  value="101">Externe</option>
 							</select>
@@ -83,7 +83,7 @@
 						</div>
 						<div class="input-field col s8">
 						    <input name="nomNewPromo" type="text" id="autocomplete-input" class="autocomplete">
-						    <label for="autocomplete-input">Libellï¿½ nouvelle promotion</label>
+						    <label for="autocomplete-input">Libellé nouvelle promotion</label>
 						</div>
 					</div>
 					<div class="row">
