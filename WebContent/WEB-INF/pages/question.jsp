@@ -8,16 +8,20 @@
 				<div class="col s12">
 					<div class="form-container mb-l" >		   	
 						<h4 style="text-align: center">Question</h4>
-						<p style="margin-top: 5vh;">Pourquoi bla bla bla bla bla</p>			   
-						<input id="bonneReponse1" type="checkbox" name="bonneReponse1">
-			    		<label for="bonneReponse1">Bonne réponse</label>   						
+						<p style="margin-top: 5vh;">${questionTirage.question.enonce}</p>			   
+						
+						<c:forEach items=" ${questionTirage.question.listeProp }" var="p" >
+						<input id="bonneReponse" type="checkbox" name="prop-}" value="<c:out value="${p.idProposition}" />">
+			    		<label for="bonneReponse">${p.enonce }</label>   		
+			    		
+			    				</c:forEach>		
 					</div>
 				</div>
 			</div>
 			<div class="row">
 			 	<div class="offset-s1 col s3">
 			 		<div class="offset-s1 col s3">
-			 		<button class="btn waves-effect waves-light" type="submit" value="-1" name="question">Précedente
+			 		<button  <c:if test="${numQuestion eq 0 }">disabled=true</c:if> class="btn waves-effect waves-light" type="submit" value="${ numQuestion-1}" name="question">Précedente
 		    		<i class="material-icons right">arrow_back</i>
   					</button>
 	 			</div>
@@ -28,7 +32,7 @@
 		  			</button>
 			 	</div>
 			 	<div class="offset-s1 col s3">
-			 		<button class="btn waves-effect waves-light" type="submit" value="+1" name="question">Suivante
+			 		<button class="btn waves-effect waves-light" type="submit" value="${ numQuestion+1}" name="question">Suivante
 		    		<i class="material-icons right">arrow_forward</i>
   					</button>
 	 			</div>

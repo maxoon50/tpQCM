@@ -24,7 +24,9 @@ public class QuestionServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("numQuestion", request.getParameter("id"));
-		
+		Epreuve epreuve =  (Epreuve) request.getSession().getAttribute("epreuve");
+		request.setAttribute("questionTirage",epreuve.getQuestionsTirage().get(Integer.parseInt(request.getParameter("id"))));
+		System.out.println(epreuve.getQuestionsTirage().get(Integer.parseInt(request.getParameter("id"))));
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/question.jsp");
 		rd.forward(request, response);
 		
