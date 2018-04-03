@@ -22,4 +22,8 @@ public static TestDAO getTestDAO() {
 	return new TestDAOJdbcImpl();
 }
 
+public static ReponseDAO getReponseDAO() {
+	return new ReponseDAOJdbcImpl();
+}
+
 }

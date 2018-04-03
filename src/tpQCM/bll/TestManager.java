@@ -21,7 +21,6 @@ public class TestManager {
 				dao.insertTest(test);
 				
 			}else {
-				System.out.println("yo");
 				throw businessExc;
 				
 			}

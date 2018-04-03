@@ -122,3 +122,12 @@ body{
 /*#cardSection{
 	visibility: hidden;
 }*/
+
+#success-display{
+    top: 0px;
+    background-color: rgb(43,187,173);
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}

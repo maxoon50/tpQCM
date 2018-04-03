@@ -39,6 +39,7 @@ public class RecapTest extends HttpServlet {
 		String duree;
 		int dureeTest;
 		Test newTest;
+		String success="yo";
 		List<Section> listeSection=new ArrayList<Section>();
 		HttpSession session = req.getSession();
 		TestManager tm=new TestManager();
@@ -55,16 +56,20 @@ public class RecapTest extends HttpServlet {
 		newTest.setListeSections(listeSection);
 		System.out.println(newTest.getSeuil_bas());
 		
-		try {
+		/*try {
 			tm.insertTest(newTest);
+			
 		} catch (BusinessException e) {
 			e.printStackTrace();
-		}
+		}*/
+		
+		
+		req.setAttribute("success", success);
 		
 		req.setAttribute("test", newTest);
 		
 		
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/pages/recapitulatifTest.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/pages/sectionAjout.jsp");
 		rd.forward(req, resp);
 	}
 	

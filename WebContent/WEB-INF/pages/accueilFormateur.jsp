@@ -21,7 +21,7 @@
 				</form>
 			</div>
 			<div class="col s2">
-				  <a href="" class="btn-floating btn-large waves-effect waves-light red">Add</a>
+				  <a href="${pageContext.request.contextPath}/formateur/ajouter-questions" class="btn-floating btn-large waves-effect waves-light red">Add</a>
 			</div>
 		</div>
 	</div>
@@ -55,7 +55,7 @@
 				</ul>
 			</div>
 			<div class="col s2">
-				  <a class="btn-floating btn-large waves-effect waves-light red">Add</a>
+				  <a href="${pageContext.request.contextPath}/formateur/ajouter-questions" class="btn-floating btn-large waves-effect waves-light red">Add</a>
 			</div>
 		</div>
 	</div>
