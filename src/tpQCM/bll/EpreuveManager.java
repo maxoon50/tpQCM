@@ -57,7 +57,7 @@ public class EpreuveManager {
 			
 			test = testMger.getTestById(idTest);
 			//On initialise l'index numordre des questions ici pour qu'il ne revienne pas à 1 à chaque nouvelle section
-			int index =1;
+			int index =0;
 			//on récupère les sections du test et on crée une hashmap avec idthem=>questionsbytheme
 			for (Section section : test.getListeSections()) {
 				//liste des question du theme de la section donnée
@@ -102,6 +102,21 @@ public class EpreuveManager {
 			e.printStackTrace();
 		}
 		return liste;
+	}
+
+	/**
+	 * methode en charge de 
+	 * @param parameter
+	 * @return
+	 */
+	public Epreuve getEpreuveById(String id) {
+		Epreuve  epreuve = null;
+		try {
+			epreuve = this.epreuveDAO.getEpreuveById(id);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		return epreuve;
 	}
 	
 	
