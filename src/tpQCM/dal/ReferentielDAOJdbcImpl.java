@@ -24,6 +24,7 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 	private static final String ADD_THEME= "INSERT INTO theme(libelle) values ( ? )";
 	private static final String GET_ALL_THEMES= "SELECT * FROM theme";
 	private static final String GET_THEME_BY_ID="SELECT libelle FROM THEME WHERE idTheme=?";
+	private static final String GET_QUESTION_BY_ID = "SELECT * FROM question WHERE idQuestion=?";
 
 //////////////////addQuestion////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -140,6 +141,48 @@ public class ReferentielDAOJdbcImpl implements ReferentielDAO {
 			
 		}	
 	}
+	
+//////////////////get question by id////////////////////////////////////////////////////////////////////////////////////////
+	
+@Override
+public Question getQuestionById(int id) throws BusinessException {
+	Question question = null;
+
+	try(Connection conn = ConnectionProvider.getConnection()){
+		
+		PreparedStatement pst = conn.prepareStatement(GET_QUESTION_BY_ID);
+		pst.setInt(1, id);		
+		ResultSet rs = pst.executeQuery();
+		
+		while(rs.next()) {
+			
+			question = new Question(
+					rs.getInt("idQuestion"),
+					rs.getString("enonce"),
+					rs.getInt("points"),
+					rs.getInt("idTheme"),
+					rs.getBoolean("uneReponse"));
+			
+			pst = conn.prepareStatement(GET_PROPOSITIONS_BY_QUESTIONSID);
+			pst.setInt(1, rs.getInt("idQuestion"));
+			ResultSet rs2 = pst.executeQuery();
+			
+			while(rs2.next()) {
+				question.addProposition(new Proposition(
+						rs2.getInt("idProposition"),
+						rs2.getString("enonce"),
+						rs2.getBoolean("estBonne"),
+						rs.getInt("idQuestion")));
+			}
+
+		}
+	}catch(Exception e) {
+		BusinessException businessExc = new BusinessException();
+		businessExc.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+		throw businessExc;
+	}
+	return question;
+}
 	
 //////////////////get all Themes////////////////////////////////////////////////////////////////////////////////////////
 	

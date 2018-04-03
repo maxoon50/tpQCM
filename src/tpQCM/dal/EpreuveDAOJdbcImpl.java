@@ -12,6 +12,7 @@ import java.util.List;
 
 import tpQCM.BusinessException;
 import tpQCM.bo.Epreuve;
+import tpQCM.bo.Question;
 import tpQCM.bo.QuestionTirage;
 
 /**
@@ -27,6 +28,7 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 	private static String INSERT_EPREUVE="INSERT INTO epreuve(dateDedutValidite,dateFinValidite,idTest,idUtilisateur)VALUES(?,?,?,?);";
 	private static String INSERT_QUESTION_TIRAGE="INSERT INTO question_tirage(estMarquee,idQuestion,numordre,idEpreuve) VALUES(?,?,?,?)";
 	private static String GET_EPREUVE_ID="SELECT * FROM epreuve WHERE idEpreuve = ?;";
+	private static  String GET_QUESTION_TIRAGE_BY_EPREUVE = "SELECT * FROM question_tirage WHERE idEpreuve = ?";
 	
 	@Override
 	public List<Epreuve> getEpreuvesByCandidatByDate(int idCandidat, Date date) throws BusinessException {
@@ -129,8 +131,12 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 	 */
 	@Override
 	public Epreuve getEpreuveById(String id) throws BusinessException {
+		
 		Epreuve epreuve = null;
+		ReferentielDAOJdbcImpl daoreferentiel = new ReferentielDAOJdbcImpl();
+		
 		try (Connection cnx = ConnectionProvider.getConnection()) {
+			
 			PreparedStatement pstmt = cnx.prepareStatement(GET_EPREUVE_ID);
 			pstmt.setInt(1, Integer.parseInt(id));
 			ResultSet rs= pstmt.executeQuery();
@@ -139,6 +145,23 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 				epreuve = new Epreuve(rs.getInt(1),
 						rs.getDate(2), rs.getDate(3), rs.getInt(4), 
 						rs.getString(5),rs.getInt(6),rs.getString(7), rs.getInt(8),rs.getInt(9));
+				
+				PreparedStatement pst2 = cnx.prepareStatement(GET_QUESTION_TIRAGE_BY_EPREUVE);
+				pst2.setInt(1,  Integer.parseInt(id));
+				ResultSet rs2 = pst2.executeQuery();
+				
+				while(rs2.next()) {
+					
+					QuestionTirage questionTirage = new QuestionTirage(
+							rs2.getBoolean("estMarquee"),
+							rs2.getInt("idQuestion"),
+							rs2.getInt("numOrdre"),
+							Integer.parseInt(id)); 
+					
+					Question question = daoreferentiel.getQuestionById(questionTirage.getIdQuestion());
+					questionTirage.setQuestion(question);
+					epreuve.addQuestionTirage(questionTirage);
+				}
 			}
 		
 		} catch (Exception e) {

@@ -9,11 +9,10 @@ public class QuestionTirage implements Serializable {
 	int idQuestion;
 	int numOrdre;
 	int idEpreuve;
-	List<Proposition> tiragePropositions;
+	Question question;
 	
 	public QuestionTirage() {
 		super();
-		this.tiragePropositions = new ArrayList<Proposition>();
 	}
 
 	public QuestionTirage(boolean estMarquee, int idQuestion, int numOrdre, int idEpreuve) {
@@ -22,7 +21,6 @@ public class QuestionTirage implements Serializable {
 		this.idQuestion = idQuestion;
 		this.numOrdre = numOrdre;
 		this.idEpreuve = idEpreuve;
-		this.tiragePropositions = new ArrayList<Proposition>();
 	}
 	
 	/**
@@ -34,7 +32,6 @@ public class QuestionTirage implements Serializable {
 		this.estMarquee = false;
 		this.idQuestion = idQuestion2;
 		this.numOrdre = index;
-		this.tiragePropositions = new ArrayList<Proposition>();
 	}
 	
 
@@ -65,18 +62,18 @@ public class QuestionTirage implements Serializable {
 
 
 
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
 	@Override
 	public String toString() {
 		return "QuestionTirage [estMarquee=" + estMarquee + ", idQuestion=" + idQuestion + ", numOrdre=" + numOrdre
-				+ ", idEpreuve=" + idEpreuve + ", tiragePropositions=" + tiragePropositions + "]";
-	}
-
-	public List<Proposition> getTiragePropositions() {
-		return tiragePropositions;
-	}
-
-	public void setTiragePropositions(List<Proposition> tiragePropositions) {
-		this.tiragePropositions = tiragePropositions;
+				+ ", idEpreuve=" + idEpreuve + ", question=" + question + "]";
 	}
 	
 	
