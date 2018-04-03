@@ -3,6 +3,7 @@
  */
 package tpQCM.dal;
 
+import java.util.Date;
 import java.util.List;
 
 import tpQCM.BusinessException;
@@ -24,7 +25,7 @@ public interface EpreuveDAO {
 	 * @return
 	 * @throws BusinessException 
 	 */
-	List<Epreuve> getEpreuvesByCandidat(int idCandidat) throws BusinessException;
+	List<Epreuve> getEpreuvesByCandidatByDate(int idCandidat,Date date) throws BusinessException;
 	
 	
 	/**
