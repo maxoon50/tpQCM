@@ -1,6 +1,10 @@
 <%@include file="./parts/head.jsp" %>
 <%@include file="./menus/menuResponsable.jsp" %>
-
+<div class="row">
+	<div class="offset-s4 col s4" >
+		<c:if test="${!empty  success}" ><div id="success-display">Création du test ${ test.libelle } réussie</div></c:if>
+	</div>
+</div>
 <div class="row">
 	<div class="offset-s2 col s8" id="blockSectionAjout">
 		<h4>Création de Sections Test</h4>
