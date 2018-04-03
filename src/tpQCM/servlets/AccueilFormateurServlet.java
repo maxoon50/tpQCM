@@ -64,16 +64,17 @@ public class AccueilFormateurServlet extends HttpServlet {
 		theme=request.getParameter("theme");
 		idTheme=Integer.parseInt(theme);
 		
-		//Récupération d'une liste de question en fonction du thème
-		List<Question>listeQuestion=new ArrayList<Question>();
-		try {
-			listeQuestion=rm.getQuestionsByTheme(idTheme);
-		} catch (BusinessException e) {
-			e.printStackTrace();
+		if(idTheme!=666) {
+			//Récupération d'une liste de question en fonction du thème
+			List<Question>listeQuestion=new ArrayList<Question>();
+			try {
+				listeQuestion=rm.getQuestionsByTheme(idTheme);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("questions", listeQuestion);
 		}
-		request.setAttribute("questions", listeQuestion);
-		
-		
+				
 		RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/pages/accueilFormateur.jsp");
 		rd.forward(request, response);
 	}

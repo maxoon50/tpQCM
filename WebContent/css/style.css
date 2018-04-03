@@ -131,3 +131,27 @@ body{
     text-align: center;
     color: white;
 }
+
+#blockQuestion{
+	margin-top: 3vh;
+	background-color: white;
+	box-shadow: 5px 10px 5px #c3c0c0;
+	padding: 5vh;
+}
+
+#blockListeQuestion{
+	margin-top: 3vh;
+	background-color: white;
+	box-shadow: 5px 10px 5px #c3c0c0;
+	padding: 5vh;
+}
+
+#blockListeQuestion .mb-l{
+	margin-bottom: 0;
+}
+
+#temoinQuestion{
+	height:30px;
+	border-radius: 2px;
+	box-shadow: 2px 2px 2px #c3c0c0;
+}

@@ -8,9 +8,9 @@
 		<h4>Thèmes</h4>
 		<div class="row">
 			<div class="input-field col s10">			
-				<form method="post" action="${pageContext.request.contextPath}/AccueilFormateur">
+				<form method="post" action="${pageContext.request.contextPath}/formateur/accueil-formateur">
 					<select name="theme">
-					    <option disabled selected>Selectionnez le thème</option>
+					    <option value="666">Selectionnez le thème</option>
 					    <c:forEach items="${ theme }" var="t">
 					    	<option  value="${t.idTheme}">${ t.libelle }</option>
 					    </c:forEach> 
