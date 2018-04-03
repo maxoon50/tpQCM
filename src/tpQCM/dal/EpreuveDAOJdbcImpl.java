@@ -26,6 +26,8 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 	private static String SELECT_ALL_EPV_CDT="SELECT * FROM epreuve WHERE idUtilisateur = ? AND dateDedutValidite<=? AND dateFinValidite>=?;";
 	private static String INSERT_EPREUVE="INSERT INTO epreuve(dateDedutValidite,dateFinValidite,idTest,idUtilisateur)VALUES(?,?,?,?);";
 	private static String INSERT_QUESTION_TIRAGE="INSERT INTO question_tirage(estMarquee,idQuestion,numordre,idEpreuve) VALUES(?,?,?,?)";
+	private static String GET_EPREUVE_ID="SELECT * FROM epreuve WHERE idEpreuve = ?;";
+	
 	@Override
 	public List<Epreuve> getEpreuvesByCandidatByDate(int idCandidat, Date date) throws BusinessException {
 		
@@ -119,5 +121,33 @@ public class EpreuveDAOJdbcImpl implements EpreuveDAO {
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
 			throw businessException;	
 		}
+	}
+
+
+	/* (non-Javadoc)
+	 * @see tpQCM.dal.EpreuveDAO#getEpreuveById(java.lang.String)
+	 */
+	@Override
+	public Epreuve getEpreuveById(String id) throws BusinessException {
+		Epreuve epreuve = null;
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(GET_EPREUVE_ID);
+			pstmt.setInt(1, Integer.parseInt(id));
+			ResultSet rs= pstmt.executeQuery();
+			
+			if(rs.next()){
+				epreuve = new Epreuve(rs.getInt(1),
+						rs.getDate(2), rs.getDate(3), rs.getInt(4), 
+						rs.getString(5),rs.getInt(6),rs.getString(7), rs.getInt(8),rs.getInt(9));
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+			throw businessException;
+		}
+			
+		return epreuve;
 	}
 }

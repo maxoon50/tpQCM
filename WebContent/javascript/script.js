@@ -24,6 +24,10 @@
 			    $("#cache-promo").removeClass("hide");
 		  } else if($("#inscr-select-profil").val()=='101'){
 			    $("#cache-promo").addClass("hide");
+			    
+			    if (!$(".cache-new-promo").hasClass("hide")){
+			    	$(".cache-new-promo").addClass("hide");
+			    }
 		  }
 	});
     

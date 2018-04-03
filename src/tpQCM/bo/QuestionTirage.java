@@ -1,16 +1,19 @@
 package tpQCM.bo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionTirage implements Serializable {
 	boolean estMarquee;
 	int idQuestion;
 	int numOrdre;
 	int idEpreuve;
-	
+	List<Proposition> tiragePropositions;
 	
 	public QuestionTirage() {
 		super();
+		this.tiragePropositions = new ArrayList<Proposition>();
 	}
 
 	public QuestionTirage(boolean estMarquee, int idQuestion, int numOrdre, int idEpreuve) {
@@ -19,6 +22,7 @@ public class QuestionTirage implements Serializable {
 		this.idQuestion = idQuestion;
 		this.numOrdre = numOrdre;
 		this.idEpreuve = idEpreuve;
+		this.tiragePropositions = new ArrayList<Proposition>();
 	}
 	
 	/**
@@ -30,6 +34,7 @@ public class QuestionTirage implements Serializable {
 		this.estMarquee = false;
 		this.idQuestion = idQuestion2;
 		this.numOrdre = index;
+		this.tiragePropositions = new ArrayList<Proposition>();
 	}
 	
 
@@ -58,11 +63,22 @@ public class QuestionTirage implements Serializable {
 		this.idEpreuve = idEpreuve;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "QuestionTirage [estMarquee=" + estMarquee + ", idQuestion=" + idQuestion + ", numOrdre=" + numOrdre
-				+ ", idEpreuve=" + idEpreuve + "]";
+				+ ", idEpreuve=" + idEpreuve + ", tiragePropositions=" + tiragePropositions + "]";
 	}
+
+	public List<Proposition> getTiragePropositions() {
+		return tiragePropositions;
+	}
+
+	public void setTiragePropositions(List<Proposition> tiragePropositions) {
+		this.tiragePropositions = tiragePropositions;
+	}
+	
 	
 	
 }

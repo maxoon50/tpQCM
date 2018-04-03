@@ -1,16 +1,6 @@
 <%@include file="./parts/head.jsp" %>
 
-	<nav>
-	    <div class="nav-wrapper">
-	      <img id="logo" src="${pageContext.request.contextPath}/images/ENIEcole.jpg"/>
-
-	      <ul id="nav-mobile" class="right hide-on-med-and-down">
-	        <li><a href="${pageContext.request.contextPath}/candidat/accueil">Tests</a></li>
-	        <li><a href="${pageContext.request.contextPath}/Resultat">Mes Résultats</a></li>
-	          <li><a href="${pageContext.request.contextPath}/logout">${sessionScope.user.prenom } / déconnection</a></li>
-	      </ul>
-	    </div>
-	</nav>
+	<%@include file="./menus/menu.jsp" %>
 	
 	
 <div class="row">
@@ -32,7 +22,7 @@
 	            	<td>${listeTests[loop.index].libelle }</td>
 	            	<td>
 	            		<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Description</a>
-						<div id="${listeEpreuve.loop.index }" class="modal"> 
+						<div id="modal-${loop.index }" class="modal"> 
 						    <div class="modal-content">
 						      	<h4>Description</h4>
 						      	<p>${listeTests[loop.index].description }</p>
@@ -44,7 +34,7 @@
 					</td>
 	            	<td>${listeTests[loop.index].duree }</td>
 	            	<td>  
-						<a href="" class="waves-effect waves-light btn red"><i class="material-icons left">access_time</i>Débuter</a></td>
+						<a href="${pageContext.request.contextPath}/candidat/epreuve-start?id=${e.idEpreuve }" class="waves-effect waves-light btn red"><i class="material-icons left">access_time</i>Débuter</a></td>
 	          	</tr>
         	</c:forEach>
 	          	

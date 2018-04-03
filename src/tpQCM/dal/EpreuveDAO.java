@@ -34,4 +34,12 @@ public interface EpreuveDAO {
 	 * @throws BusinessException
 	 */
 	public void insertEpreuve(Epreuve epreuve) throws BusinessException;
+
+
+	/**
+	 * methode en charge de 
+	 * @param id
+	 * @return
+	 */
+	public Epreuve getEpreuveById(String id)throws BusinessException;
 }
