@@ -6,6 +6,9 @@ package tpQCM.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import tpQCM.BusinessException;
 import tpQCM.bo.Section;
 import tpQCM.bo.Test;
@@ -21,7 +24,7 @@ public class TestDAOJdbcImpl implements TestDAO {
 	private static final String INSERT_SECTION= "INSERT INTO section_test (nbQuestionsATirer, idTest, idTheme ) values ( ?,?,?)";
 	private static final String GET_TEST_BYID = "SELECT * FROM test WHERE idTest = ?";
 	private static final String GET_SECTIONS_TEST = "SELECT * FROM section_test WHERE idTest = ?";
-	
+	private static final String GET_ALL="SELECT * FROM test;";
 	/**
 	 * Constructeur
 	 */
@@ -121,6 +124,45 @@ public class TestDAOJdbcImpl implements TestDAO {
 		}
 		System.out.println("dal :"+test);
 		return test;
+	}
+
+//////////////////get all tests ////////////////////////////////////////////////////////////////////////////////////////
+	/* (non-Javadoc)
+	 * @see tpQCM.dal.TestDAO#getAllTests()
+	 */
+	@Override
+	public List<Test> getAllTests() throws BusinessException {
+		
+		List<Test> listeTests=new ArrayList<Test>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(GET_ALL);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next())
+			{	//on crée le test
+				Test test = new Test(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4),
+						rs.getInt(5), rs.getInt(6));
+				
+				//il faut récupérer les sections du test pour compléter l'objet JAVA
+				PreparedStatement pst = cnx.prepareStatement(GET_SECTIONS_TEST);
+				pst.setInt(1, test.getIdTest());
+				ResultSet rs2 = pst.executeQuery();
+					while(rs2.next()) {
+						// on récupère les sections et on les ajoute aux tests
+						Section section = new Section(rs2.getInt("nbQuestionsATirer"), rs2.getInt("idTest"), rs2.getInt("idTheme"));
+						test.addSection(section);
+					}
+				//on ajoue le test après lui avoir ajouté les sections
+				listeTests.add(test);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+			throw businessException;
+		}
+		
+		return listeTests;
 	}
 
 }

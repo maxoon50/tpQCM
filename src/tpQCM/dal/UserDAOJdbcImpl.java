@@ -19,8 +19,6 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static String INSERT_USER = "INSERT INTO utilisateur(nom,prenom,email,password,codeProfil) VALUES(?,?,?,?,?)";
 	private static String SELECT_ID = "SELECT * FROM utilisateur WHERE idUtilisateur=?";
 	private static String SELECT_EMAIL = "SELECT * FROM utilisateur WHERE email=?";
-	// private static String SELECT_EMAIL_MDP="SELECT * FROM utilisateur WHERE
-	// email=? AND password=?";
 	private static String SELECT_PROMO = "SELECT * FROM utilisateur WHERE codePromo=?";
 	private static String SELECT_RESP_FORM = "SELECT * FROM utilisateur WHERE codeProfil=102 OR codeProfil=103";
 	private static String UPDATE_MDP = "UPDATE utilisateur SET password=?WHERE idUtilisateur=?";
@@ -29,6 +27,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static String DELETE_USER="DELETE FROM utilisateur WHERE idUtilisateur=?";
 	private static String SELECT_CODEPROMO="SELECT codePromo FROM promotion";
 	private static String INSERT_PROMO="INSERT INTO promotion(codePromo,Libelle) VALUES(?,?)";
+	private static String SELECT_EXTERNE="SELECT * FROM utilisateur WHERE codeProfil=101;";
 	
 	@Override
 	public void insertUser(Utilisateur user) throws BusinessException {
@@ -347,4 +346,29 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 		}
 	}
+	
+	public List<Utilisateur> getExterne() throws BusinessException {
+		List<Utilisateur> listeExternes = new ArrayList<Utilisateur>();
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_EXTERNE);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				listeExternes.add(new Utilisateur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getInt(6)));
+				//comme ce sont des externes, ils n'ont pas de code Promo
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_OBJET_ECHEC);
+			throw businessException;
+		}
+		
+		
+		return listeExternes ;
+	}
+	
+	
 }

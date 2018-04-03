@@ -55,4 +55,7 @@ public interface UserDAO {
 	 * @throws SQLIntegrityConstraintViolationException 
 	 */
 	public void insertPromotion(Promotion promotion) throws BusinessException;
+	
+	public List<Utilisateur> getExterne() throws BusinessException;
+	
 }
