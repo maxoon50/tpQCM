@@ -44,10 +44,10 @@
 						</c:forEach> 
 				
 				</select>
-									
+								
 				<div class = "row">    
 					 <div class="input-field">          
-		               <label for="dateDebut">Date de début de validité de l'épreuve</label>              
+		               <label for="dateDebut"><br><br>Date de début de validité de l'épreuve</label>    
 		               <input type = "date" class = "datepicker" id="dateDebut" name="dateDebut"/>    
 		            </div>
 	            </div> 
@@ -55,10 +55,10 @@
 				<div class = "row">
 	               <div class="input-field">
 	                   <input type = "date" class = "datepicker" id="dateFin" name="dateFin"/>
-	                   <label for="dateFin">Date de fin de validité de l'épreuve</label>    
+	                   <label for="dateFin"><br><br>Date de fin de validité de l'épreuve</label>    
 	            	</div>
 	            </div> 
-	            
+	            <br>
 	            <div class="row">
 					<div class="offset-s4 col s4">
 						<input type="submit" class="waves-effect waves-light btn-large" value="Inscrire au test">
