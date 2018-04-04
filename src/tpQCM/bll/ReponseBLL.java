@@ -26,4 +26,18 @@ public class ReponseBLL {
 			throw e;
 		}
 	}
+	
+	public void deleteReponse(ReponseTirage reponse) throws BusinessException{
+		BusinessException businessExc = new BusinessException();
+		
+		try {
+			if(reponse.getIdQuestion() !=0 && reponse.getIdEpreuve() != 0) {
+				dao.deleteReponse(reponse);
+			}else {
+				throw businessExc;
+			}
+		}catch (BusinessException e) {
+			throw e;
+		}
+	}
 }

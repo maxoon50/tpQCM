@@ -87,6 +87,12 @@ public class QuestionServlet extends HttpServlet {
 			}	
 		}
 		
+		try {
+			reponseManager.deleteReponse(new ReponseTirage(idEpreuve,Integer.parseInt(idQuestion)));
+		} catch (BusinessException e1) {
+			e1.printStackTrace();
+		}
+		
 		for(ReponseTirage r : listePropositionSelectionnees) {
 			try {
 				System.out.println(r);
