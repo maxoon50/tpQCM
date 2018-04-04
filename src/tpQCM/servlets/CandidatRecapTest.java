@@ -17,7 +17,7 @@ import tpQCM.bo.QuestionTirage;
 /**
  * Servlet implementation class CandidatRecapTest
  */
-@WebServlet("/Candidat/Recap-Test")
+@WebServlet("/candidat/recap-Test")
 public class CandidatRecapTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -7,11 +7,13 @@
 			<div class="row">			
 				<c:forEach items="${listeQuestion }" var="l">
 					<div class="col s3">
-						<a href="/candidat/question?id=${ l.idQuestion}" id="temoinQuestion" <c:if test="${l.estMarquee == true }">
-							style="background-color: red"
-							</c:if> style="text-align:center;background-color:green">	
-							Question ${ l.idQuestion}
-						</a>
+						<div id="temoin" <c:if test="${l.estMarquee == true }">
+								style="background-color: red"
+								</c:if> style="text-align:center;background-color:#b6ecb6">
+							<a href="${pageContext.request.contextPath}/candidat/question?id=${ l.numOrdre}" >
+								Question ${ l.idQuestion}
+							</a>
+						</div>
 					</div>
 				</c:forEach>
 			</div>
