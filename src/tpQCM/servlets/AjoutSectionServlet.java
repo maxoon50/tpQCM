@@ -94,9 +94,7 @@ public class AjoutSectionServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			List<Section> listeLibelleSection ;
 			List<Integer> listeNbQuestion= new ArrayList<Integer>();
-			
-		
-		
+
 			listeNbQuestion.add(nbQuestion);
 			
 			if(session.getAttribute("sections")==null) {
