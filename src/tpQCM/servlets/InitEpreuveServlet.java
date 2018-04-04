@@ -30,6 +30,7 @@ public class InitEpreuveServlet extends HttpServlet {
 		// on récupère l 'épreuve avec le parametre id
 		EpreuveManager epMger = new EpreuveManager();
 		Epreuve epreuve = epMger.getEpreuveById(request.getParameter("id"));
+		System.out.println(epreuve);
 		epreuve.setEtat("EC");
 		// on stocke l 'épreuve en session
 		request.getSession().setAttribute("epreuve", epreuve);

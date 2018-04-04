@@ -17,7 +17,7 @@ public class ReponseBLL {
 		BusinessException businessExc = new BusinessException();
 		
 		try {
-			if(reponse.getIdProposition()==0 || reponse.getIdQuestion()==0 || reponse.getIdEpreuve()==0) {
+			if(reponse.getIdProposition() !=0 && reponse.getIdQuestion() !=0 && reponse.getIdEpreuve() != 0) {
 				dao.insertReponse(reponse);
 			}else {
 				throw businessExc;

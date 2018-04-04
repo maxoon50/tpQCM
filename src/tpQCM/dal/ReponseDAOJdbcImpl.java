@@ -16,21 +16,21 @@ public class ReponseDAOJdbcImpl implements ReponseDAO{
 	
 	@Override
 	public void insertReponse(ReponseTirage reponse) throws BusinessException {
-		
+		System.out.println("reponse dans dao = "+reponse);
 		if(reponse == null) {
 			BusinessException businessExc = new BusinessException();
 			throw businessExc;
 		}
 				
 		try(Connection conn = ConnectionProvider.getConnection()){
-			
+			conn.setAutoCommit(true);
 			PreparedStatement pst = conn.prepareStatement(INSERT_REPONSE);
 			
 			pst.setInt(1, reponse.getIdProposition());
 			pst.setInt(2, reponse.getIdQuestion());
 			pst.setInt(3, reponse.getIdEpreuve());
-			pst.executeUpdate();			
-
+			int nrbeRow = pst.executeUpdate();			
+System.out.println(nrbeRow);
 		}catch(Exception e) {
 		      e.printStackTrace();
 		      BusinessException businessException = new BusinessException();

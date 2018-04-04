@@ -106,6 +106,9 @@ public class Question implements Serializable {
 	public Boolean isUneReponse() {
 		return uneReponse;
 	}
+	public Boolean getUneReponse() {
+		return uneReponse;
+	}
 
 	public void setUneReponse(boolean uneReponse) {
 		this.uneReponse = uneReponse;

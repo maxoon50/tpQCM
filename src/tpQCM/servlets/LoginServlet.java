@@ -47,19 +47,19 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user", user);
 			
 			switch (user.getCodeProfil()) {
-	            case 100: rd = request.getRequestDispatcher("/WEB-INF/pages/accueil.jsp");
+			  case 100: response.sendRedirect(request.getContextPath()+"/candidat/accueil");
 	                     break;
-	            case 101: rd = request.getRequestDispatcher("/WEB-INF/pages/accueil.jsp") ;
+              case 101: response.sendRedirect(request.getContextPath()+"/candidat/accueil");
 	                     break;
-	            case 102:rd = request.getRequestDispatcher("/WEB-INF/pages/accueilFormateur.jsp") ;
+              case 102:response.sendRedirect(request.getContextPath()+"/formateur/accueil-formateur");  
 	                     break;
-	            case 103:rd = request.getRequestDispatcher("/WEB-INF/pages/accueilResponsable.jsp") ;
+              case 103:response.sendRedirect(request.getContextPath()+"/responsable/accueilresponsable");
                 		break;
-	            case 104:rd = request.getRequestDispatcher("/WEB-INF/pages/accueilAdmin.jsp") ;
+              case 104:response.sendRedirect(request.getContextPath()+"/responsable/accueilresponsable");
                 		break;
-                default:rd = request.getRequestDispatcher("/WEB-INF/pages/login.jsp");
+              default:response.sendRedirect(request.getContextPath()+"/login");        
 			}
-			rd.forward(request, response);
+
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("erreur", e.getListeCodesErreur());
