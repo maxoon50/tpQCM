@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,17 +26,11 @@ import tpQCM.messages.LecteurMessage;
 /**
  * Servlet implementation class InscriptionEpreuveServlet
  */
-@WebServlet("/responsable/inscriptionPromotion")
+@WebServlet("/responsable/inscriptionTest")
 public class InscriptionPromotionEpreuveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InscriptionPromotionEpreuveServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+ 
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,18 +40,44 @@ public class InscriptionPromotionEpreuveServlet extends HttpServlet {
 		TestManager testMger = new TestManager();
 		List<String> listeCodesPromo = new ArrayList<String>();
 		List<Test> listeTests = new ArrayList<Test>();
+		List<Utilisateur>listeStagiaires = new ArrayList<Utilisateur>();
+		
+		// on récupère les données de base, codePromo et liste des tests dispo
 		try {
 			listeCodesPromo = userMger.getAllCodePromo();
 			request.setAttribute("listeCodesPromo", listeCodesPromo);
 			listeTests = testMger.getAllTests();
 			request.setAttribute("listeTests", listeTests);
+			
 		} catch (BusinessException e) {
 			e.printStackTrace();
-		}
+			
+		} 
 		
-		System.out.println(listeCodesPromo);
-	
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/inscriptionPromotionEpreuve.jsp");
+		//si on arrive sur la servlet après selection de la promo, on récupère
+		 if(request.getParameter("promotion")!=null){
+			 if(request.getParameter("promotion").equals("externe")){
+					try {
+						listeStagiaires = userMger.getExterne();
+						request.setAttribute("candidats", listeStagiaires);
+						System.out.println(listeStagiaires+"dans externe");
+					} catch (BusinessException e) {
+						e.printStackTrace();
+					}
+					
+			} else {
+					try {
+						listeStagiaires = userMger.getPromotion(request.getParameter("promotion"));
+						request.setAttribute("candidats", listeStagiaires);
+						System.out.println(listeStagiaires+"dans getPromotion");
+					} catch (BusinessException e) {
+						e.printStackTrace();
+					}
+			}
+		 }
+		// et on redirige sur la jsp
+		 System.out.println(listeStagiaires);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/pages/inscriptionTest.jsp");
 		rd.forward(request, response);		
 	}
 
@@ -67,38 +88,38 @@ public class InscriptionPromotionEpreuveServlet extends HttpServlet {
 		
 		List<Integer> listeCodesErreur=new ArrayList<>();
 		EpreuveManager epMger = new EpreuveManager();
-		
 		UtilisateurManager userMger = new UtilisateurManager();
 		
 		try {	
 			//on récupère les stagiaires de la promotion sélectionnée
-			List<Utilisateur>listeStagiaires = userMger.getPromotion(request.getParameter("promotion"));
+			List<String>listeAInscrire = Arrays.asList(request.getParameterValues("selectCandidats"));
+			
 			String debut = request.getParameter("dateDebut");
+			System.out.println(debut);
 			String fin = request.getParameter("dateFin");
-			SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd hh:mi:ss");
+			System.out.println("date :"+new Date());
+		
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
 			Date d = sdf.parse(debut);
 			Date f =sdf.parse(fin);
-			for (Utilisateur user : listeStagiaires) {
-				epMger.inscrireCandidatEpreuve(user.getIdUtilisateur(), 
-						Integer.parseInt(request.getParameter("idTest")), 
+			System.out.println("date :"+new Date());
+			System.out.println("debut :"+d);
+			System.out.println("fin :"+f);
+			System.out.println("debut :"+d);
+			System.out.println("fin :"+f);
+		
+			for (String str :listeAInscrire) {
+				epMger.inscrireCandidatEpreuve(Integer.parseInt(str), 
+						Integer.parseInt(request.getParameter("test")), 
 						d, f);
 			}
-			request.setAttribute("flashMessage", "Promotion inscrite");
+			
 			response.sendRedirect(request.getContextPath()+request.getServletPath());
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatServlet.ERROR_CAST_DATE);
-		} catch (BusinessException e ) {
-			e.printStackTrace();
-			listeCodesErreur = e.getListeCodesErreur();
-			ArrayList<String>listeErreurs = new ArrayList<String>();
-			
-			for (Integer code : listeCodesErreur) {
-				listeErreurs.add(LecteurMessage.getMessageErreur(code));
-			}
-			request.setAttribute("errors",listeErreurs );
-			doGet(request,response);
 		}
 	}
 
