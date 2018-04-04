@@ -141,7 +141,7 @@ public class UtilisateurManager {
 		List<Utilisateur> liste = new ArrayList<Utilisateur>();
 		System.out.println(promo);
 		if(promo!=null&&!promo.trim().equals("")) {
-			liste = this.userDAO.selectByPromo(promo.trim());
+			liste = this.userDAO.selectByPromo(promo);
 		}
 		return liste;
 	}

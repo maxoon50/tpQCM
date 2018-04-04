@@ -18,6 +18,16 @@ public class ReponseTirage implements Serializable {
 		this.idEpreuve = idEpreuve;
 	}
 
+	/**
+	 * constucteur pour ReponseTirage.java
+	 * @param idEpreuve2
+	 * @param idQuestion2
+	 */
+	public ReponseTirage(int idEpreuve2, int idQuestion2) {
+		this.idEpreuve = idEpreuve2;
+		this.idQuestion = idQuestion2;
+	}
+
 	public int getIdProposition() {
 		return idProposition;
 	}
