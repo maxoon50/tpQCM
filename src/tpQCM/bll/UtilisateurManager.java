@@ -139,8 +139,9 @@ public class UtilisateurManager {
 	 */
 	public List<Utilisateur>getPromotion(String promo) throws BusinessException{
 		List<Utilisateur> liste = new ArrayList<Utilisateur>();
+		System.out.println(promo);
 		if(promo!=null&&!promo.trim().equals("")) {
-			liste = this.userDAO.selectByPromo(promo);
+			liste = this.userDAO.selectByPromo(promo.trim());
 		}
 		return liste;
 	}
