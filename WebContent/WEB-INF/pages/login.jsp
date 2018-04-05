@@ -21,7 +21,7 @@
 						    <i class="material-icons ">no_encryption</i>
 						</div>
 						<div class="input-field col s8">
-						    <input name="password" type="text" id="autocomplete-input" class="autocomplete">
+						    <input name="password" type="password" id="autocomplete-input" class="autocomplete">
 						    <label for="autocomplete-input">Mot de Passe</label>
 						</div>
 					</div>

@@ -4,7 +4,7 @@
 	
 	
 <div class="row">
-	<div class="input-field offset-s3 col s6" id="blockListeTest">
+	<div class="input-field offset-s2 col s8" id="blockListeTest">
 		<h3>Liste des tests</h3>	
 		<table class="centered">
 	        <thead>
