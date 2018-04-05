@@ -15,14 +15,12 @@
 					    	<option  value="${t.idTheme}">${ t.libelle }</option>
 					    </c:forEach> 
 					</select>
-					<button class="btn waves-effect waves-light" type="submit" name="action">Générer
+					<button class="btn waves-effect waves-light" type="submit" name="action">Afficher
 					    <i class="material-icons right">send</i>
 					</button>
 				</form>
 			</div>
-			<div class="col s2">
-				  <a href="${pageContext.request.contextPath}/formateur/ajouter-questions" class="btn-floating btn-large waves-effect waves-light red">Add</a>
-			</div>
+
 		</div>
 	</div>
 </div>
