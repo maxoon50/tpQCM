@@ -37,7 +37,7 @@ public class SessionFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
 	
-		if(req.getServletPath().toLowerCase().contains("login")) {
+		if(req.getServletPath().toLowerCase().contains("login") ||req.getServletPath().toLowerCase().contains("images") || req.getServletPath().toLowerCase().contains("css") || req.getServletPath().toLowerCase().contains("javascript")) {
 			chain.doFilter(request, response);	
 		}else if(session.getAttribute("user") == null) {
 			res.sendRedirect(req.getContextPath()+"/login");
