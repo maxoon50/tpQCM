@@ -22,7 +22,7 @@ import tpQCM.bo.Theme;
 /**
  * Servlet implementation class AjoutSectionServlet
  */
-@WebServlet("/AjoutSection")
+@WebServlet("/formateur/ajout-section")
 public class AjoutSectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -138,7 +138,7 @@ public class AjoutSectionServlet extends HttpServlet {
 		request.setAttribute("themes", ht);
 		
 		
-		RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/pages/sectionAjout.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/pages/sectionAjout.jsp");
 		rd.forward(request, response);
 	}
 

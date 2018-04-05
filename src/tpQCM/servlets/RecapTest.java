@@ -54,14 +54,13 @@ public class RecapTest extends HttpServlet {
 		}
 		newTest= new Test(libelle, dureeTest);
 		newTest.setListeSections(listeSection);
-		System.out.println(newTest.getSeuil_bas());
 		
-		/*try {
+		try {
 			tm.insertTest(newTest);
 			
 		} catch (BusinessException e) {
 			e.printStackTrace();
-		}*/
+		}
 		
 		
 		req.setAttribute("success", success);

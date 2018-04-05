@@ -51,6 +51,7 @@ public class QuestionServlet extends HttpServlet {
 		String nextQuestion = request.getParameter("question");
 		String idQuestion  =  request.getParameter("idQuestion");
 		String lastQuestion = request.getParameter("lastQuestion");
+
 		int idEpreuve = ((Epreuve) request.getSession().getAttribute("epreuve")).getIdEpreuve();
 		ReponseTirage reponseTirage = null;
 		List<ReponseTirage> listePropositionSelectionnees = new ArrayList<ReponseTirage>();
@@ -102,7 +103,13 @@ public class QuestionServlet extends HttpServlet {
 			}
 			
 		}
-		response.sendRedirect(request.getContextPath()+"/candidat/question?id="+nextQuestion);
+		if(lastQuestion != null && lastQuestion.equals("true")) {
+			response.sendRedirect(request.getContextPath()+"/candidat/recap-Test");
+
+		}else {
+			response.sendRedirect(request.getContextPath()+"/candidat/question?id="+nextQuestion);
+
+		}
 
 	}
 
