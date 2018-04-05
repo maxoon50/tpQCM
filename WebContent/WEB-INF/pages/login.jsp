@@ -7,8 +7,8 @@
 		    <div class="input-field offset-s4 col s4" id="blockLogin">
 		    	<form method="post" action="${pageContext.request.contextPath}/login">
 			    	<h3>Login</h3>
-				    <div class="row">
-				     	<div class="col s4">
+				    <div class="row  flex-align-vert">
+				     	<div class="col s4  flex-align-vert">
 				          	<i class="material-icons ">mail_outline</i>
 				       	</div>
 				        <div class="input-field col s8">
@@ -16,8 +16,8 @@
 				          	<label for="autocomplete-input">Email</label>
 				        </div>
 				    </div>
-					<div class="row">
-						<div class="col s4">
+						 <div class="row  flex-align-vert">
+						<div class="col s4  flex-align-vert">
 						    <i class="material-icons ">no_encryption</i>
 						</div>
 						<div class="input-field col s8">
@@ -32,11 +32,11 @@
 					</div>
 				</form> 
 				<div>
-				<c:if test="${!empty erreur}">Erreur classique</c:if>
+
 				
 				<c:if test="${!empty erreur}">
-					<div class="alert alert-danger" role="alert">
-					  <strong>Erreur!</strong>
+					<div class="alert alert-danger centerText" role="alert">
+					  <strong>Erreur login / mot de passe incorrect(s)</strong>
 					  <ul>
 					  	<c:forEach var="code" items="${erreur}">
 					  		<li>${LecteurMessage.getMessageErreur(code)}</li>

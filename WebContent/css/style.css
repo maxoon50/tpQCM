@@ -10,6 +10,9 @@ img#logo{
 	box-shadow: 5px 10px 5px #c3c0c0;
 	padding: 5vh;
 }
+.centerText{
+	text-align: center;
+}
 
 #blockLogin h3{
 	text-align: center;
