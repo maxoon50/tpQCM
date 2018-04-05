@@ -1,6 +1,7 @@
 package tpQCM.servlets;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -29,9 +30,11 @@ public class CandidatRecapTest extends HttpServlet {
 		Epreuve epreuve=(Epreuve) session.getAttribute("epreuve");
 		int nbQuestions=epreuve.getQuestionsTirage().size();
 		List<QuestionTirage> listeQuestion=epreuve.getQuestionsTirage();
+		listeQuestion.sort(Comparator.comparing(QuestionTirage::getNumOrdre));
 		request.setAttribute("listeQuestion", listeQuestion);
 		request.setAttribute("nbQuestions", nbQuestions);
-		
+
+
 		RequestDispatcher rd= request.getRequestDispatcher("/WEB-INF/pages/candidatRecapTest.jsp");
 		rd.forward(request, response);
 	}

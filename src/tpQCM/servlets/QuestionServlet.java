@@ -16,7 +16,9 @@ import tpQCM.bll.ReponseBLL;
 import tpQCM.bo.Epreuve;
 import tpQCM.bo.Proposition;
 import tpQCM.bo.Question;
+import tpQCM.bo.QuestionTirage;
 import tpQCM.bo.ReponseTirage;
+import tpQCM.dal.ReponseDAOJdbcImpl;
 
 
 @WebServlet("/candidat/question")
@@ -51,6 +53,7 @@ public class QuestionServlet extends HttpServlet {
 		String nextQuestion = request.getParameter("question");
 		String idQuestion  =  request.getParameter("idQuestion");
 		String lastQuestion = request.getParameter("lastQuestion");
+		String numQuestion = request.getParameter("numQuestion");
 
 		int idEpreuve = ((Epreuve) request.getSession().getAttribute("epreuve")).getIdEpreuve();
 		ReponseTirage reponseTirage = null;
@@ -103,12 +106,13 @@ public class QuestionServlet extends HttpServlet {
 			}
 			
 		}
+
+
 		if(lastQuestion != null && lastQuestion.equals("true")) {
 			response.sendRedirect(request.getContextPath()+"/candidat/recap-Test");
 
 		}else {
 			response.sendRedirect(request.getContextPath()+"/candidat/question?id="+nextQuestion);
-
 		}
 
 	}

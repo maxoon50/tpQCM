@@ -79,16 +79,7 @@
 		</div>		
 	 </div>
 	 
-	 <div class="row" >
-		<div class="offset-s2 col s8" id="blockListeQuestion">
-			<h4 style="text-align: center">Suivi Questionnaire</h4>
-			<div class="row" >
-				<div class="col s2">
-					<div id="temoinQuestion" style="background-color: #78bd78;"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	
 </form> 	 	
 	 
