@@ -1,5 +1,5 @@
 <%@include file="./parts/head.jsp" %>
-<%@include file="./menus/menuResponsable.jsp" %>
+<%@include file="./menus/menuFormateur.jsp" %>
 <div class="row">
 	<div class="offset-s4 col s4" >
 		<c:if test="${!empty  success}" ><div id="success-display">Création du test ${ test.libelle } réussie</div></c:if>
@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="offset-s2 col s8" id="blockSectionAjout">
 		<h4>Création de Sections Test</h4>
-		<form method="post" action="${pageContext.request.contextPath}/AjoutSection">
+		<form method="post" action="${pageContext.request.contextPath}/formateur/ajout-section">
 			<div class="row">
 				<div class="input-field col s6">			
 					<select name="theme" id="js-selection-theme">
