@@ -29,7 +29,7 @@ public class AccueilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EpreuveManager epMger = new EpreuveManager();
-		epMger.inscrireCandidatEpreuve(2,1, new Date(),new Date());
+		//epMger.inscrireCandidatEpreuve(2,1, new Date(),new Date());
 		
 		Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
 		

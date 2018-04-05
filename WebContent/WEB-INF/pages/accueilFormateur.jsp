@@ -44,12 +44,7 @@
 						    </li>
 						</c:forEach>
 					</c:if>
-					<c:if test="${empty questions}">
-						<li>				    	
-						   <div class="collapsible-header"><i class="material-icons">help_outline</i>Question</div>
-						   <div class="collapsible-body"><span>Réponse</span></div>
-						</li>
-					</c:if>
+	
 				</ul>
 			</div>
 			<div class="col s2">

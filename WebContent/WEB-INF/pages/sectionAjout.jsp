@@ -31,7 +31,7 @@
 			<div class="row">
 				<div class="offset-s4 col s4">
 					
-					<button class="btn waves-effect waves-light" type="submit" name="action">Générer
+					<button class="btn waves-effect waves-light" type="submit" name="action">Ajouter
 					    <i class="material-icons right">send</i>
 					</button>
 				</div>

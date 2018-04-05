@@ -21,18 +21,18 @@
 	        	 <tr>
 	            	<td>${listeTests[loop.index].libelle }</td>
 	            	<td>
-	            		<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Description</a>
+	            		<a class="waves-effect waves-light btn modal-trigger" href="${pageContext.request.contextPath}#modal1" data-modal="modal-${loop.index }">Description</a>
 						<div id="modal-${loop.index }" class="modal"> 
 						    <div class="modal-content">
 						      	<h4>Description</h4>
-						      	<p>${listeTests[loop.index].description }</p>
+						      	<p>${listeTests[loop.index].libelle }</p>
 						    </div>
 						   	<div class="modal-footer">
 						   		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</a>
 						    </div>
 						 </div>
 					</td>
-	            	<td>${listeTests[loop.index].duree }</td>
+	            	<td>${(listeTests[loop.index].duree)/(3600*60) }minutes </td>
 	            	<td>  
 						<a href="${pageContext.request.contextPath}/candidat/epreuve-start?id=${e.idEpreuve }" class="waves-effect waves-light btn red"><i class="material-icons left">access_time</i>Débuter</a></td>
 	          	</tr>
