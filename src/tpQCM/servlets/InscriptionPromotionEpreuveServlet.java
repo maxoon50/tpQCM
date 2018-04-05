@@ -99,7 +99,7 @@ public class InscriptionPromotionEpreuveServlet extends HttpServlet {
 			String fin = request.getParameter("dateFin");
 			System.out.println("date :"+new Date());
 		
-			SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date d = sdf.parse(debut);
 			Date f =sdf.parse(fin);
 			System.out.println("date :"+new Date());
